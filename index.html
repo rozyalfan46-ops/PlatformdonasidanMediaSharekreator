@@ -1,30 +1,106 @@
-<section id="donate" class="hidden">
-  <div class="card">
-    <div class="eyebrow">KIRIM DUKUNGAN</div>
-    <h2>Dukung <span id="targetName"></span></h2>
-    <p class="muted">Setiap dukungan berarti untuk kreator.</p>
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DonasiSTMR — Demo</title>
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;background:#f4f6fb;color:#202538;font:16px system-ui,Arial}
+    header{background:#5b35c8;color:white;padding:18px 20px;font-weight:800}
+    main{max-width:760px;margin:24px auto;padding:0 14px}
+    .card{background:white;border-radius:16px;padding:20px;margin-bottom:16px;box-shadow:0 5px 24px #2025380c}
+    h1{font-size:24px;margin:0 0 6px}
+    .muted{color:#6c7285;font-size:14px}
+    .video{position:relative;padding-top:56.25%;background:#171923;border-radius:12px;overflow:hidden}
+    .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+    .amounts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}
+    .amount{border:1px solid #d9dce7;border-radius:10px;background:white;padding:12px;font-weight:700;cursor:pointer}
+    .amount.active{border-color:#5b35c8;background:#f1edff;color:#4b28b5}
+    label{display:block;font-size:14px;font-weight:700;margin:14px 0 6px}
+    input,textarea{width:100%;padding:12px;border:1px solid #d9dce7;border-radius:10px;font:inherit}
+    textarea{min-height:84px;resize:vertical}
+    button.submit{width:100%;border:0;border-radius:10px;background:#5b35c8;color:white;padding:14px;font:inherit;font-weight:800;cursor:pointer;margin-top:16px}
+    #result{display:none;margin-top:14px;padding:12px;border-radius:10px;background:#effaf1;color:#20652d}
+    footer{text-align:center;color:#777f92;font-size:13px;padding:10px 0 28px}
+  </style>
+</head>
+<body>
+  <header>DonasiSTMR <span style="font-weight:400">· Demo</span></header>
+  <main>
+    <section class="card">
+      <h1>Dukung kreator</h1>
+      <p class="muted">Ini halaman demonstrasi. Donasi belum menggunakan pembayaran asli.</p>
+      <div class="video">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/VIDEO_ID"
+          title="Video kreator"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <p class="muted">Ganti <code>VIDEO_ID</code> pada alamat video dengan ID video YouTube milikmu.</p>
+    </section>
 
-    <label>Nama kamu</label>
-    <input id="donorName" placeholder="Nama pendukung">
+    <section class="card">
+      <h2 style="margin-top:0">Kirim dukungan</h2>
+      <p class="muted">Pilih nominal, lalu isi nama dan pesan. Ini hanya simulasi.</p>
 
-    <label>Jumlah dukungan</label>
-    <select id="donationAmount">
-      <option value="5000">Rp5.000</option>
-      <option value="10000">Rp10.000</option>
-      <option value="20000">Rp20.000</option>
-      <option value="50000">Rp50.000</option>
-    </select>
+      <div class="amounts" aria-label="Pilihan nominal">
+        <button class="amount active" type="button" data-amount="5000">Rp5.000</button>
+        <button class="amount" type="button" data-amount="10000">Rp10.000</button>
+        <button class="amount" type="button" data-amount="20000">Rp20.000</button>
+      </div>
 
-    <label>Pesan</label>
-    <textarea id="donorMessage" placeholder="Tulis pesan dukungan"></textarea>
+      <label for="custom">Nominal lain (Rp)</label>
+      <input id="custom" type="number" min="1000" max="1000000" placeholder="Minimal Rp1.000">
 
-    <p class="notice">
-      Sebelum pembayaran, periksa total akhir. Biaya tambahan dari penyedia pembayaran
-      mungkin berlaku dan akan ditampilkan sebelum kamu menyelesaikan transaksi.
-    </p>
+      <label for="name">Nama</label>
+      <input id="name" maxlength="40" placeholder="Nama kamu">
 
-    <button onclick="demoDonate()">Kirim Dukungan Demo</button>
-    <p id="donateMsg" class="notice"></p>
-    <button class="secondary" onclick="show('creators')">Kembali</button>
-  </div>
-</section>
+      <label for="message">Pesan</label>
+      <textarea id="message" maxlength="200" placeholder="Tulis pesan dukungan..."></textarea>
+
+      <button class="submit" id="donate" type="button">Kirim donasi demo</button>
+      <div id="result" role="status"></div>
+    </section>
+    <footer>DonasiSTMR · Mode demo — tidak ada pembayaran yang diproses.</footer>
+  </main>
+
+  <script>
+    let selectedAmount = 5000;
+    const amountButtons = document.querySelectorAll(".amount");
+    const customInput = document.getElementById("custom");
+    const result = document.getElementById("result");
+
+    amountButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        selectedAmount = Number(button.dataset.amount);
+        customInput.value = "";
+        amountButtons.forEach(item => item.classList.toggle("active", item === button));
+      });
+    });
+
+    customInput.addEventListener("input", () => {
+      amountButtons.forEach(button => button.classList.remove("active"));
+    });
+
+    document.getElementById("donate").addEventListener("click", () => {
+      const amount = customInput.value ? Number(customInput.value) : selectedAmount;
+      const name = document.getElementById("name").value.trim() || "Anonim";
+      const message = document.getElementById("message").value.trim();
+
+      if (!Number.isInteger(amount) || amount < 1000 || amount > 1000000) {
+        result.style.display = "block";
+        result.textContent = "Masukkan nominal antara Rp1.000 dan Rp1.000.000.";
+        return;
+      }
+
+      result.style.display = "block";
+      result.textContent =
+        `Simulasi berhasil: ${name} memilih dukungan Rp${amount.toLocaleString("id-ID")}` +
+        (message ? ` dengan pesan “${message}”.` : ".");
+    });
+  </script>
+</body>
+</html>
