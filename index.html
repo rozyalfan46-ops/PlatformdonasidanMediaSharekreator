@@ -7,30 +7,42 @@
 <title>Donasiku - Dukung Kreator</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#081426;color:#f4f7ff;font-family:Arial,sans-serif}
-header{background:#10233b;padding:22px 6%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px}
-.logo{font-size:30px;font-weight:bold;color:#54e0c0}
-.logo span{color:#ffad55}
+:root{--bg:#071321;--panel:#10243b;--mint:#54e0c0;--orange:#ffad55;--muted:#a9bdd0}
+body{margin:0;background:var(--bg);color:#f4f7ff;font-family:Arial,sans-serif}
+header{background:#0d2035;padding:18px 6%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px;border-bottom:1px solid #203c59}
+.logo{font-size:30px;font-weight:bold;color:var(--mint)}
+.logo span{color:var(--orange)}
 nav{display:flex;gap:8px;flex-wrap:wrap}
-button{border:0;border-radius:10px;padding:12px 17px;background:#54e0c0;color:#081426;font-weight:bold;cursor:pointer}
+button{border:0;border-radius:12px;padding:13px 18px;background:var(--mint);color:#071321;font-weight:bold;cursor:pointer;transition:.2s}
+button:hover{filter:brightness(1.08);transform:translateY(-1px)}
 .secondary{background:#29435e;color:white}
-main{max-width:1050px;margin:30px auto;padding:0 17px}
-.hero{padding:45px 25px;background:linear-gradient(130deg,#102d49,#123c4c);border-radius:22px;margin-bottom:22px}
-.hero h1{font-size:36px;margin:0 0 12px}
-.hero p,.muted{color:#b8c8d9;line-height:1.6}
-.card{background:#10233b;border:1px solid #203c59;padding:22px;border-radius:18px;margin-bottom:18px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
-input,textarea,select{width:100%;padding:14px;margin:8px 0 15px;border:1px solid #45617c;border-radius:10px;background:#081426;color:white;font-size:16px}
-textarea{min-height:90px}
+main{max-width:1100px;margin:35px auto;padding:0 18px}
+.hero{padding:55px 30px;background:radial-gradient(ellipse at top right,#245b64 0%,transparent 60%),linear-gradient(130deg,#102d49,#123c4c);border:1px solid #28556a;border-radius:26px;margin-bottom:24px}
+.hero h1{font-size:clamp(30px,5vw,48px);margin:0 0 14px;line-height:1.15}
+.hero p,.muted{color:var(--muted);line-height:1.7}
+.card{background:linear-gradient(145deg,#122943,#0e2035);border:1px solid #203c59;padding:24px;border-radius:20px;margin-bottom:20px;box-shadow:0 12px 30px #00000018}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.creator{padding:20px;background:#0b1b30;border:1px solid #203c59;border-radius:16px}
+.creator h3{margin:5px 0 10px}
+.tag{color:var(--mint);font-size:13px;letter-spacing:1px}
+input,textarea,select{width:100%;padding:14px;margin:8px 0 16px;border:1px solid #35516c;border-radius:12px;background:#081426;color:white;font-size:16px}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--mint);border-color:transparent}
+textarea{min-height:90px;resize:vertical}
 label{display:block;color:#c7d5e4}
 .hidden{display:none!important}
-.creator{padding:18px;background:#0b1b30;border-radius:14px}
-.creator h3{margin:5px 0}
-.tag{color:#54e0c0;font-size:13px}
-.video{background:#020812;border-radius:14px;aspect-ratio:16/9;display:grid;place-items:center;overflow:hidden}
+.video{background:#020812;border-radius:16px;aspect-ratio:16/9;display:grid;place-items:center;overflow:hidden}
 .video iframe{width:100%;height:100%;border:0}
 footer{text-align:center;color:#8296aa;padding:30px}
 .notice{font-size:13px;color:#ffbd73}
+.donation-alert{position:fixed;z-index:9999;right:20px;bottom:20px;width:min(380px,calc(100% - 32px));display:flex;align-items:flex-start;gap:13px;padding:18px;background:#153c3a;border:1px solid var(--mint);border-radius:18px;box-shadow:0 15px 45px #0008;opacity:0;visibility:hidden;transform:translateY(20px);transition:.3s ease}
+.donation-alert.active{opacity:1;visibility:visible;transform:translateY(0)}
+.alert-icon{font-size:28px}
+.alert-content{flex:1;min-width:0}
+.alert-content strong{color:var(--mint)}
+.alert-content p{margin:8px 0;color:white}
+.alert-content small{color:#b8c8d9;overflow-wrap:anywhere}
+.alert-close{background:transparent;color:#b8c8d9;padding:0 5px;font-size:24px}
+@media(max-width:600px){header{padding:16px}nav{width:100%}nav button{flex:1}.hero{padding:35px 22px}.card{padding:19px}}
 </style>
 </head>
 <body>
@@ -56,7 +68,7 @@ footer{text-align:center;color:#8296aa;padding:30px}
 <div class="grid">
 <div class="card"><h2>💚 Donasi</h2><p class="muted">Dukung kreator dengan pesan penyemangat.</p></div>
 <div class="card"><h2>🎬 Media Share</h2><p class="muted">Bagikan video YouTube favoritmu.</p></div>
-<div class="card"><h2>🎙️ Live Alert</h2><p class="muted">Sistem notifikasi live direncanakan untuk integrasi berikutnya.</p></div>
+<div class="card"><h2>🎙️ Live Alert</h2><p class="muted">Notifikasi donasi ditampilkan secara langsung saat sistem pembayaran terhubung.</p></div>
 </div>
 </section>
 
@@ -72,12 +84,9 @@ footer{text-align:center;color:#8296aa;padding:30px}
 <div class="card">
 <h1>Daftar Kreator</h1>
 <p class="muted">Buat profil kreator Donasiku.</p>
-<label>Nama kreator</label>
-<input id="regName" placeholder="Nama kamu">
-<label>Username</label>
-<input id="regUser" placeholder="contoh: kreator123">
-<label>Deskripsi</label>
-<textarea id="regBio" placeholder="Ceritakan tentang kontenmu"></textarea>
+<label>Nama kreator</label><input id="regName" placeholder="Nama kamu">
+<label>Username</label><input id="regUser" placeholder="contoh: kreator123">
+<label>Deskripsi</label><textarea id="regBio" placeholder="Ceritakan tentang kontenmu"></textarea>
 <button onclick="register()">Buat Profil Demo</button>
 <button class="secondary" onclick="show('home')">Kembali</button>
 <p id="regMsg"></p>
@@ -88,8 +97,7 @@ footer{text-align:center;color:#8296aa;padding:30px}
 <section id="login" class="hidden">
 <div class="card">
 <h1>Login Kreator</h1>
-<label>Username</label>
-<input id="loginUser" placeholder="Username kreator">
+<label>Username</label><input id="loginUser" placeholder="Username kreator">
 <button onclick="login()">Masuk ke Dashboard Demo</button>
 <button class="secondary" onclick="show('home')">Kembali</button>
 <p id="loginMsg"></p>
@@ -114,14 +122,19 @@ footer{text-align:center;color:#8296aa;padding:30px}
 <div class="video" id="videoBox">Video akan tampil di sini</div>
 <p class="notice">Pratinjau saja. Belum terhubung ke live atau OBS.</p>
 </div>
+<div class="card">
+<h2>Notifikasi Donasi</h2>
+<p class="muted">Coba tampilan notifikasi dengan simulasi donasi.</p>
+<button onclick="testDonationAlert()">Tes Notifikasi</button>
+<p class="notice">Notifikasi ini hanya contoh, bukan pembayaran asli.</p>
+</div>
 </section>
 
 <section id="donate" class="hidden">
 <div class="card">
 <h1>Dukung <span id="targetName"></span></h1>
 <p class="muted">Kirim pesan dukungan untuk kreator.</p>
-<label>Nama kamu</label>
-<input id="donorName" placeholder="Nama pendukung">
+<label>Nama kamu</label><input id="donorName" placeholder="Nama pendukung">
 <label>Jumlah dukungan</label>
 <select id="donationAmount">
 <option value="5000">Rp5.000</option>
@@ -129,13 +142,22 @@ footer{text-align:center;color:#8296aa;padding:30px}
 <option value="20000">Rp20.000</option>
 <option value="50000">Rp50.000</option>
 </select>
-<label>Pesan</label>
-<textarea id="donorMessage" placeholder="Tulis pesan dukungan"></textarea>
+<label>Pesan</label><textarea id="donorMessage" placeholder="Tulis pesan dukungan"></textarea>
 <button onclick="demoDonate()">Kirim dukungan demo</button>
 <p id="donateMsg" class="notice"></p>
 <button class="secondary" onclick="show('creators')">Kembali</button>
 </div>
 </section>
+
+<div id="donationAlert" class="donation-alert" aria-live="polite">
+<div class="alert-icon">💚</div>
+<div class="alert-content">
+<strong id="alertTitle">Donasi baru masuk!</strong>
+<p id="alertText"></p>
+<small id="alertMessage"></small>
+</div>
+<button class="alert-close" onclick="hideDonationAlert()">×</button>
+</div>
 </main>
 
 <footer>© 2026 Donasiku · Dukung kreator, bagikan semangat.</footer>
@@ -143,15 +165,18 @@ footer{text-align:center;color:#8296aa;padding:30px}
 <script>
 const sections=['home','creators','register','login','dashboard','donate'];
 let currentCreator='';
+
 function show(id){
 sections.forEach(s=>document.getElementById(s).classList.add('hidden'));
 document.getElementById(id).classList.remove('hidden');
 if(id==='creators')renderCreators();
 }
+
 function getCreators(){
 try{return JSON.parse(localStorage.getItem('donasiku_creators')||'{}')}
 catch(e){return {}}
 }
+
 function register(){
 let name=document.getElementById('regName').value.trim();
 let user=document.getElementById('regUser').value.trim().toLowerCase();
@@ -165,6 +190,7 @@ creators[user]={name,bio};
 localStorage.setItem('donasiku_creators',JSON.stringify(creators));
 msg.textContent='Profil demo berhasil dibuat. Silakan login.';
 }
+
 function login(){
 let user=document.getElementById('loginUser').value.trim().toLowerCase();
 let creators=getCreators();
@@ -175,6 +201,7 @@ return;
 currentCreator=user;
 dashboard();
 }
+
 function dashboard(){
 let c=getCreators()[currentCreator];
 if(!c)return show('home');
@@ -183,7 +210,9 @@ document.getElementById('dashBio').textContent=c.bio||'Kreator Donasiku';
 document.getElementById('donationLink').textContent=location.origin+location.pathname+'?kreator='+currentCreator;
 show('dashboard');
 }
+
 function logout(){currentCreator='';show('home')}
+
 function renderCreators(){
 let list=document.getElementById('creatorList');
 let creators=getCreators();
@@ -201,16 +230,38 @@ b.onclick=()=>openDonation(user);
 div.append(h,p,b);list.appendChild(div);
 });
 }
+
 function openDonation(user){
 currentCreator=user;
 document.getElementById('targetName').textContent=getCreators()[user].name;
 show('donate');
 }
+
 function demoDonate(){
 let name=document.getElementById('donorName').value.trim();
-if(!name){document.getElementById('donateMsg').textContent='Isi nama kamu dahulu.';return}
-document.getElementById('donateMsg').textContent='Ini hanya simulasi. Pembayaran belum diproses.';
+let amount=document.getElementById('donationAmount').value;
+let message=document.getElementById('donorMessage').value.trim();
+let msg=document.getElementById('donateMsg');
+if(!name){msg.textContent='Isi nama kamu dahulu.';return}
+msg.textContent='Ini hanya simulasi. Pembayaran belum diproses.';
+showDonationAlert(name,amount,message);
 }
+
+function showDonationAlert(name,amount,message){
+document.getElementById('alertTitle').textContent='Donasi baru masuk!';
+document.getElementById('alertText').textContent=name+' berdonasi Rp'+Number(amount).toLocaleString('id-ID');
+document.getElementById('alertMessage').textContent=message||'Terima kasih atas dukungannya!';
+document.getElementById('donationAlert').classList.add('active');
+}
+
+function hideDonationAlert(){
+document.getElementById('donationAlert').classList.remove('active');
+}
+
+function testDonationAlert(){
+showDonationAlert('Pendukung Donasiku',50000,'Semangat terus!');
+}
+
 function previewVideo(){
 let url=document.getElementById('youtubeUrl').value.trim();
 let id='';
@@ -222,11 +273,13 @@ else if(u.hostname.includes('youtube.com'))id=u.searchParams.get('v')||u.pathnam
 if(!/^[a-zA-Z0-9_-]{11}$/.test(id)){alert('Link YouTube tidak valid.');return}
 document.getElementById('videoBox').innerHTML='<iframe src="https://www.youtube.com/embed/'+id+'" allowfullscreen></iframe>';
 }
+
 function copyLink(){
 let text=document.getElementById('donationLink').textContent;
 if(navigator.clipboard){navigator.clipboard.writeText(text).then(()=>alert('Link disalin.')).catch(()=>alert(text))}
 else alert(text);
 }
+
 const params=new URLSearchParams(location.search);
 if(params.get('kreator')){
 let user=params.get('kreator');
