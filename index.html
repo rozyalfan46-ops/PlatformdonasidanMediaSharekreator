@@ -1,127 +1,237 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Donasiku - Platform Kreator</title>
+<title>Donasiku - Dukung Kreator</title>
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#081426;color:#f4f7ff;font-family:Arial,sans-serif}
-header{padding:24px;background:#10233b;border-bottom:1px solid #29435e}
-.logo{font-size:32px;font-weight:bold;color:#54e0c0}
+header{background:#10233b;padding:22px 6%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px}
+.logo{font-size:30px;font-weight:bold;color:#54e0c0}
 .logo span{color:#ffad55}
-main{max-width:850px;margin:25px auto;padding:16px}
-.card{background:#10233b;padding:24px;border-radius:20px;margin-bottom:18px}
-h1,h2{margin-top:0}
-p{color:#b8c8d9;line-height:1.6}
-input{width:100%;padding:14px;margin:8px 0 16px;border:1px solid #45617c;border-radius:10px;background:#081426;color:white;font-size:16px}
-button{padding:13px 18px;border:0;border-radius:10px;background:#54e0c0;color:#081426;font-weight:bold;font-size:15px;margin:4px;cursor:pointer}
+nav{display:flex;gap:8px;flex-wrap:wrap}
+button{border:0;border-radius:10px;padding:12px 17px;background:#54e0c0;color:#081426;font-weight:bold;cursor:pointer}
 .secondary{background:#29435e;color:white}
-.hidden{display:none}
+main{max-width:1050px;margin:30px auto;padding:0 17px}
+.hero{padding:45px 25px;background:linear-gradient(130deg,#102d49,#123c4c);border-radius:22px;margin-bottom:22px}
+.hero h1{font-size:36px;margin:0 0 12px}
+.hero p,.muted{color:#b8c8d9;line-height:1.6}
+.card{background:#10233b;border:1px solid #203c59;padding:22px;border-radius:18px;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+input,textarea,select{width:100%;padding:14px;margin:8px 0 15px;border:1px solid #45617c;border-radius:10px;background:#081426;color:white;font-size:16px}
+textarea{min-height:90px}
+label{display:block;color:#c7d5e4}
+.hidden{display:none!important}
+.creator{padding:18px;background:#0b1b30;border-radius:14px}
+.creator h3{margin:5px 0}
+.tag{color:#54e0c0;font-size:13px}
+.video{background:#020812;border-radius:14px;aspect-ratio:16/9;display:grid;place-items:center;overflow:hidden}
+.video iframe{width:100%;height:100%;border:0}
+footer{text-align:center;color:#8296aa;padding:30px}
+.notice{font-size:13px;color:#ffbd73}
 </style>
 </head>
 <body>
 <header>
 <div class="logo">dona<span>siku</span></div>
-<p>Dukung kreator. Bagikan semangat.</p>
-</header>
-<main>
-
-<section class="card" id="home">
-<h1>Selamat datang di Donasiku!</h1>
-<p>Platform dukungan untuk kreator dan streamer Indonesia.</p>
+<nav>
+<button class="secondary" onclick="show('home')">Beranda</button>
+<button class="secondary" onclick="show('creators')">Kreator</button>
 <button onclick="show('register')">Daftar Kreator</button>
 <button class="secondary" onclick="show('login')">Login</button>
+</nav>
+</header>
+
+<main>
+<section id="home">
+<div class="hero">
+<p class="tag">PLATFORM DUKUNGAN KREATOR</p>
+<h1>Dukung kreator favoritmu.</h1>
+<p>Kirim dukungan, pesan, dan video YouTube untuk kreator kesukaanmu melalui Donasiku.</p>
+<button onclick="show('creators')">Jelajahi Kreator</button>
+<button class="secondary" onclick="show('register')">Gabung sebagai Kreator</button>
+</div>
+<div class="grid">
+<div class="card"><h2>💚 Donasi</h2><p class="muted">Dukung kreator dengan pesan penyemangat.</p></div>
+<div class="card"><h2>🎬 Media Share</h2><p class="muted">Bagikan video YouTube favoritmu.</p></div>
+<div class="card"><h2>🎙️ Live Alert</h2><p class="muted">Sistem notifikasi live direncanakan untuk integrasi berikutnya.</p></div>
+</div>
 </section>
 
-<section class="card hidden" id="register">
-<h2>Daftar Kreator</h2>
-<input id="regName" placeholder="Nama kreator">
-<input id="regUser" placeholder="Username unik">
-<input id="regEmail" type="email" placeholder="Email">
-<input id="regPass" type="password" placeholder="Password">
-<button onclick="register()">Buat Akun</button>
+<section id="creators" class="hidden">
+<div class="card">
+<h1>Daftar Kreator</h1>
+<p class="muted">Temukan kreator yang ingin kamu dukung.</p>
+<div id="creatorList" class="grid"></div>
+</div>
+</section>
+
+<section id="register" class="hidden">
+<div class="card">
+<h1>Daftar Kreator</h1>
+<p class="muted">Buat profil kreator Donasiku.</p>
+<label>Nama kreator</label>
+<input id="regName" placeholder="Nama kamu">
+<label>Username</label>
+<input id="regUser" placeholder="contoh: kreator123">
+<label>Deskripsi</label>
+<textarea id="regBio" placeholder="Ceritakan tentang kontenmu"></textarea>
+<button onclick="register()">Buat Profil Demo</button>
 <button class="secondary" onclick="show('home')">Kembali</button>
 <p id="regMsg"></p>
+<p class="notice">Prototype: profil disimpan hanya di browser ini. Belum menjadi akun online.</p>
+</div>
 </section>
 
-<section class="card hidden" id="login">
-<h2>Login Kreator</h2>
-<input id="loginUser" placeholder="Username">
-<input id="loginPass" type="password" placeholder="Password">
-<button onclick="login()">Masuk</button>
+<section id="login" class="hidden">
+<div class="card">
+<h1>Login Kreator</h1>
+<label>Username</label>
+<input id="loginUser" placeholder="Username kreator">
+<button onclick="login()">Masuk ke Dashboard Demo</button>
 <button class="secondary" onclick="show('home')">Kembali</button>
 <p id="loginMsg"></p>
+</div>
 </section>
 
-<section class="card hidden" id="dashboard">
-<h2>Dashboard Kreator</h2>
-<p>Selamat datang, <b id="creatorName"></b>!</p>
-<p>Username: <b id="creatorUser"></b></p>
-<h3>Link donasi kamu</h3>
-<p id="creatorLink"></p>
-<button onclick="copyLink()">Salin Link Donasi</button>
+<section id="dashboard" class="hidden">
+<div class="card">
+<h1>Dashboard Kreator</h1>
+<p>Halo, <b id="dashName"></b>!</p>
+<p class="muted" id="dashBio"></p>
+<h3>Link halaman donasi</h3>
+<p id="donationLink"></p>
+<button onclick="copyLink()">Salin Link</button>
 <button class="secondary" onclick="logout()">Logout</button>
+</div>
+<div class="card">
+<h2>Media Share</h2>
+<p class="muted">Pratinjau video YouTube.</p>
+<input id="youtubeUrl" placeholder="Tempel link YouTube">
+<button onclick="previewVideo()">Tampilkan Video</button>
+<div class="video" id="videoBox">Video akan tampil di sini</div>
+<p class="notice">Pratinjau saja. Belum terhubung ke live atau OBS.</p>
+</div>
 </section>
 
-<section class="card">
-<h2>Fitur Donasiku</h2>
-<p>• Halaman donasi pribadi kreator</p>
-<p>• Dashboard kreator</p>
-<p>• Media Share YouTube</p>
-<p>• Notifikasi donasi dan OBS (tahap pengembangan)</p>
+<section id="donate" class="hidden">
+<div class="card">
+<h1>Dukung <span id="targetName"></span></h1>
+<p class="muted">Kirim pesan dukungan untuk kreator.</p>
+<label>Nama kamu</label>
+<input id="donorName" placeholder="Nama pendukung">
+<label>Jumlah dukungan</label>
+<select id="donationAmount">
+<option value="5000">Rp5.000</option>
+<option value="10000">Rp10.000</option>
+<option value="20000">Rp20.000</option>
+<option value="50000">Rp50.000</option>
+</select>
+<label>Pesan</label>
+<textarea id="donorMessage" placeholder="Tulis pesan dukungan"></textarea>
+<button onclick="demoDonate()">Kirim dukungan demo</button>
+<p id="donateMsg" class="notice"></p>
+<button class="secondary" onclick="show('creators')">Kembali</button>
+</div>
 </section>
-
 </main>
+
+<footer>© 2026 Donasiku · Dukung kreator, bagikan semangat.</footer>
+
 <script>
+const sections=['home','creators','register','login','dashboard','donate'];
+let currentCreator='';
 function show(id){
-document.querySelectorAll('main section').forEach(x=>x.classList.add('hidden'));
+sections.forEach(s=>document.getElementById(s).classList.add('hidden'));
 document.getElementById(id).classList.remove('hidden');
+if(id==='creators')renderCreators();
+}
+function getCreators(){
+try{return JSON.parse(localStorage.getItem('donasiku_creators')||'{}')}
+catch(e){return {}}
 }
 function register(){
 let name=document.getElementById('regName').value.trim();
 let user=document.getElementById('regUser').value.trim().toLowerCase();
-let email=document.getElementById('regEmail').value.trim();
-let pass=document.getElementById('regPass').value;
+let bio=document.getElementById('regBio').value.trim();
 let msg=document.getElementById('regMsg');
-if(!name||!user||!email||!pass){msg.textContent='Lengkapi semua kolom.';return}
-if(!/^[a-z0-9_]{3,20}$/.test(user)){msg.textContent='Username harus 3-20 karakter, huruf kecil, angka atau _. ';return}
-let accounts=JSON.parse(localStorage.getItem('donasiku_demo')||'{}');
-if(accounts[user]){msg.textContent='Username sudah digunakan.';return}
-accounts[user]={name,email,pass};
-localStorage.setItem('donasiku_demo',JSON.stringify(accounts));
-msg.textContent='Akun demo berhasil dibuat. Silakan login.';
+if(!name||!user){msg.textContent='Isi nama dan username terlebih dahulu.';return}
+if(!/^[a-z0-9_]{3,20}$/.test(user)){msg.textContent='Username 3-20 karakter, gunakan huruf kecil, angka, atau _. ';return}
+let creators=getCreators();
+if(creators[user]){msg.textContent='Username sudah digunakan.';return}
+creators[user]={name,bio};
+localStorage.setItem('donasiku_creators',JSON.stringify(creators));
+msg.textContent='Profil demo berhasil dibuat. Silakan login.';
 }
 function login(){
 let user=document.getElementById('loginUser').value.trim().toLowerCase();
-let pass=document.getElementById('loginPass').value;
-let accounts=JSON.parse(localStorage.getItem('donasiku_demo')||'{}');
-if(!accounts[user]||accounts[user].pass!==pass){
-document.getElementById('loginMsg').textContent='Username atau password salah.';
+let creators=getCreators();
+if(!creators[user]){
+document.getElementById('loginMsg').textContent='Profil tidak ditemukan di browser ini.';
 return;
 }
-sessionStorage.setItem('donasiku_user',user);
+currentCreator=user;
 dashboard();
 }
 function dashboard(){
-let user=sessionStorage.getItem('donasiku_user');
-let accounts=JSON.parse(localStorage.getItem('donasiku_demo')||'{}');
-if(!user||!accounts[user])return show('home');
-document.getElementById('creatorName').textContent=accounts[user].name;
-document.getElementById('creatorUser').textContent=user;
-document.getElementById('creatorLink').textContent=location.href.split('?')[0]+'?kreator='+user;
+let c=getCreators()[currentCreator];
+if(!c)return show('home');
+document.getElementById('dashName').textContent=c.name;
+document.getElementById('dashBio').textContent=c.bio||'Kreator Donasiku';
+document.getElementById('donationLink').textContent=location.origin+location.pathname+'?kreator='+currentCreator;
 show('dashboard');
 }
+function logout(){currentCreator='';show('home')}
+function renderCreators(){
+let list=document.getElementById('creatorList');
+let creators=getCreators();
+let keys=Object.keys(creators);
+list.innerHTML='';
+if(!keys.length){list.textContent='Belum ada kreator terdaftar di browser ini.';return}
+keys.forEach(user=>{
+let c=creators[user];
+let div=document.createElement('div');
+div.className='creator';
+let h=document.createElement('h3');h.textContent=c.name;
+let p=document.createElement('p');p.textContent=c.bio||'Kreator Donasiku';
+let b=document.createElement('button');b.textContent='Dukung Kreator';
+b.onclick=()=>openDonation(user);
+div.append(h,p,b);list.appendChild(div);
+});
+}
+function openDonation(user){
+currentCreator=user;
+document.getElementById('targetName').textContent=getCreators()[user].name;
+show('donate');
+}
+function demoDonate(){
+let name=document.getElementById('donorName').value.trim();
+if(!name){document.getElementById('donateMsg').textContent='Isi nama kamu dahulu.';return}
+document.getElementById('donateMsg').textContent='Ini hanya simulasi. Pembayaran belum diproses.';
+}
+function previewVideo(){
+let url=document.getElementById('youtubeUrl').value.trim();
+let id='';
+try{
+let u=new URL(url);
+if(u.hostname==='youtu.be')id=u.pathname.slice(1);
+else if(u.hostname.includes('youtube.com'))id=u.searchParams.get('v')||u.pathname.split('/').filter(Boolean).pop();
+}catch(e){}
+if(!/^[a-zA-Z0-9_-]{11}$/.test(id)){alert('Link YouTube tidak valid.');return}
+document.getElementById('videoBox').innerHTML='<iframe src="https://www.youtube.com/embed/'+id+'" allowfullscreen></iframe>';
+}
 function copyLink(){
-let text=document.getElementById('creatorLink').textContent;
-if(navigator.clipboard)navigator.clipboard.writeText(text).then(()=>alert('Link disalin!'));
+let text=document.getElementById('donationLink').textContent;
+if(navigator.clipboard){navigator.clipboard.writeText(text).then(()=>alert('Link disalin.')).catch(()=>alert(text))}
 else alert(text);
 }
-function logout(){
-sessionStorage.removeItem('donasiku_user');
-show('home');
+const params=new URLSearchParams(location.search);
+if(params.get('kreator')){
+let user=params.get('kreator');
+if(getCreators()[user])openDonation(user);
 }
-if(sessionStorage.getItem('donasiku_user'))dashboard();
 </script>
 </body>
 </html>
