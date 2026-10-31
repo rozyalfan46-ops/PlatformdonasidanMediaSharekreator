@@ -1,290 +1,276 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Donasiku - Dukung Kreator</title>
+<meta name="theme-color" content="#0b1020">
+<title>donasistmr.net — Dukung Kreator</title>
+
 <style>
+:root{
+  --bg:#0b1020;--panel:#121a2e;--panel2:#19243b;
+  --mint:#68f0c0;--purple:#a78bfa;--text:#f8fafc;
+  --muted:#9caac1;--border:#28344d;
+}
 *{box-sizing:border-box}
-:root{--bg:#071321;--panel:#10243b;--mint:#54e0c0;--orange:#ffad55;--muted:#a9bdd0}
-body{margin:0;background:var(--bg);color:#f4f7ff;font-family:Arial,sans-serif}
-header{background:#0d2035;padding:18px 6%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px;border-bottom:1px solid #203c59}
-.logo{font-size:30px;font-weight:bold;color:var(--mint)}
-.logo span{color:var(--orange)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer;transition:.2s}
+button:hover{transform:translateY(-2px);filter:brightness(1.1)}
+header{position:sticky;top:0;z-index:10;background:#0b1020ed;backdrop-filter:blur(15px);border-bottom:1px solid var(--border)}
+.header-inner{max-width:1150px;margin:auto;padding:16px 22px;display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
+.logo{font-size:27px;font-weight:900;letter-spacing:-1px}
+.logo span{color:var(--mint)}
 nav{display:flex;gap:8px;flex-wrap:wrap}
-button{border:0;border-radius:12px;padding:13px 18px;background:var(--mint);color:#071321;font-weight:bold;cursor:pointer;transition:.2s}
-button:hover{filter:brightness(1.08);transform:translateY(-1px)}
-.secondary{background:#29435e;color:white}
-main{max-width:1100px;margin:35px auto;padding:0 18px}
-.hero{padding:55px 30px;background:radial-gradient(ellipse at top right,#245b64 0%,transparent 60%),linear-gradient(130deg,#102d49,#123c4c);border:1px solid #28556a;border-radius:26px;margin-bottom:24px}
-.hero h1{font-size:clamp(30px,5vw,48px);margin:0 0 14px;line-height:1.15}
-.hero p,.muted{color:var(--muted);line-height:1.7}
-.card{background:linear-gradient(145deg,#122943,#0e2035);border:1px solid #203c59;padding:24px;border-radius:20px;margin-bottom:20px;box-shadow:0 12px 30px #00000018}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-.creator{padding:20px;background:#0b1b30;border:1px solid #203c59;border-radius:16px}
-.creator h3{margin:5px 0 10px}
-.tag{color:var(--mint);font-size:13px;letter-spacing:1px}
-input,textarea,select{width:100%;padding:14px;margin:8px 0 16px;border:1px solid #35516c;border-radius:12px;background:#081426;color:white;font-size:16px}
-input:focus,textarea:focus,select:focus{outline:2px solid var(--mint);border-color:transparent}
-textarea{min-height:90px;resize:vertical}
-label{display:block;color:#c7d5e4}
+button{border:0;border-radius:12px;padding:12px 17px;background:var(--mint);color:#071321;font-weight:800}
+.secondary{background:#202c43;color:#e2e8f0}
+main{max-width:1150px;margin:35px auto;padding:0 22px}
 .hidden{display:none!important}
-.video{background:#020812;border-radius:16px;aspect-ratio:16/9;display:grid;place-items:center;overflow:hidden}
+.hero{position:relative;overflow:hidden;padding:55px 42px;border:1px solid #34415c;border-radius:30px;background:radial-gradient(ellipse at 85% 10%,#5d4ba855,transparent 40%),radial-gradient(ellipse at 10% 100%,#3ccba733,transparent 45%),linear-gradient(135deg,#18223b,#10182a)}
+.hero-content{position:relative;z-index:1;max-width:650px}
+.eyebrow{color:var(--mint);font-size:12px;font-weight:800;letter-spacing:2px}
+h1{font-size:clamp(36px,6vw,64px);line-height:1.08;letter-spacing:-2px;margin:18px 0}
+h2{font-size:25px;letter-spacing:-.5px}
+p{line-height:1.7}
+.muted{color:var(--muted)}
+.hero p{max-width:540px;color:#b8c5d9;font-size:17px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.hero-stats{display:flex;gap:30px;margin-top:38px;flex-wrap:wrap}
+.stat strong{display:block;font-size:23px}
+.stat span{font-size:12px;color:var(--muted)}
+.hero-art{position:absolute;right:7%;top:50%;transform:translateY(-50%);width:190px;height:190px;border-radius:50%;display:grid;place-items:center;font-size:90px;background:linear-gradient(145deg,#68f0c044,#a78bfa33);border:1px solid #ffffff22;box-shadow:0 0 100px #68f0c020}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin:45px 0 20px}
+.section-head h2{margin:0 0 5px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.card{background:linear-gradient(145deg,#17223a,#111a2d);border:1px solid var(--border);border-radius:22px;padding:24px;margin-bottom:18px}
+.feature{padding:25px}
+.feature-icon{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;font-size:24px;background:#68f0c018;margin-bottom:18px}
+.creator{background:var(--panel);border:1px solid var(--border);border-radius:22px;overflow:hidden}
+.creator-cover{height:105px;background:radial-gradient(circle at 80% 20%,#a78bfa88,transparent 45%),linear-gradient(120deg,#173a48,#28204c)}
+.creator-body{padding:20px}
+.avatar{width:62px;height:62px;border-radius:20px;display:grid;place-items:center;font-size:26px;background:linear-gradient(135deg,#68f0c0,#a78bfa);color:#0b1020;font-weight:900;border:4px solid var(--panel);margin-top:-49px}
+.creator h3{margin:12px 0 5px}
+.creator p{font-size:14px;color:var(--muted);min-height:45px}
+.creator button{width:100%;margin-top:12px}
+label{display:block;color:#cbd5e1;font-size:14px;margin-top:12px}
+input,textarea,select{width:100%;padding:14px;margin:8px 0 12px;border:1px solid #35425c;border-radius:12px;background:#0b1020;color:white;outline:none}
+input:focus,textarea:focus,select:focus{border-color:var(--mint)}
+textarea{min-height:95px;resize:vertical}
+.video{background:#050914;border-radius:16px;aspect-ratio:16/9;display:grid;place-items:center;overflow:hidden;color:var(--muted)}
 .video iframe{width:100%;height:100%;border:0}
-footer{text-align:center;color:#8296aa;padding:30px}
-.notice{font-size:13px;color:#ffbd73}
-.donation-alert{position:fixed;z-index:9999;right:20px;bottom:20px;width:min(380px,calc(100% - 32px));display:flex;align-items:flex-start;gap:13px;padding:18px;background:#153c3a;border:1px solid var(--mint);border-radius:18px;box-shadow:0 15px 45px #0008;opacity:0;visibility:hidden;transform:translateY(20px);transition:.3s ease}
+.notice{font-size:13px;color:#fbbf77}
+.fee-summary{background:#0b1020;border:1px solid var(--border);border-radius:14px;padding:12px 15px;margin:0 0 14px}
+.fee-summary p{display:flex;justify-content:space-between;gap:12px;margin:7px 0}
+.fee-summary .total{border-top:1px solid var(--border);padding-top:10px;font-weight:800;color:var(--mint)}
+footer{margin-top:60px;padding:35px 20px;border-top:1px solid var(--border);text-align:center;color:var(--muted);font-size:13px}
+.donation-alert{position:fixed;z-index:99;right:20px;bottom:20px;width:min(390px,calc(100% - 32px));display:flex;gap:13px;align-items:flex-start;padding:18px;background:#152b2b;border:1px solid #68f0c077;border-radius:18px;box-shadow:0 20px 70px #0009;opacity:0;visibility:hidden;transform:translateY(25px);transition:.35s ease}
 .donation-alert.active{opacity:1;visibility:visible;transform:translateY(0)}
-.alert-icon{font-size:28px}
+.alert-icon{width:43px;height:43px;flex-shrink:0;border-radius:14px;background:#68f0c022;display:grid;place-items:center;font-size:23px}
 .alert-content{flex:1;min-width:0}
 .alert-content strong{color:var(--mint)}
-.alert-content p{margin:8px 0;color:white}
-.alert-content small{color:#b8c8d9;overflow-wrap:anywhere}
-.alert-close{background:transparent;color:#b8c8d9;padding:0 5px;font-size:24px}
-@media(max-width:600px){header{padding:16px}nav{width:100%}nav button{flex:1}.hero{padding:35px 22px}.card{padding:19px}}
+.alert-content p{margin:7px 0;color:white}
+.alert-content small{color:#a7c3bd;overflow-wrap:anywhere}
+.alert-close{padding:0;background:transparent;color:#a7b5c9;font-size:24px}
+@media(max-width:800px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero-art{right:5%;opacity:.25}}
+@media(max-width:550px){
+  .header-inner{padding:15px}nav{width:100%}nav button{flex:1;padding:11px 8px;font-size:12px}
+  main{padding:0 15px;margin-top:20px}.hero{padding:38px 23px}.hero-art{display:none}
+  .grid{grid-template-columns:1fr}.hero-stats{gap:20px}.card{padding:20px}
+  .section-head{align-items:start;flex-direction:column}
+}
 </style>
 </head>
+
 <body>
 <header>
-<div class="logo">dona<span>siku</span></div>
-<nav>
-<button class="secondary" onclick="show('home')">Beranda</button>
-<button class="secondary" onclick="show('creators')">Kreator</button>
-<button onclick="show('register')">Daftar Kreator</button>
-<button class="secondary" onclick="show('login')">Login</button>
-</nav>
+  <div class="header-inner">
+    <div class="logo">donasi<span>stmr.net</span></div>
+    <nav>
+      <button class="secondary" onclick="show('home')">Beranda</button>
+      <button class="secondary" onclick="show('creators')">Kreator</button>
+      <button class="secondary" onclick="show('register')">Daftar</button>
+      <button onclick="show('login')">Login</button>
+    </nav>
+  </div>
 </header>
 
 <main>
 <section id="home">
-<div class="hero">
-<p class="tag">PLATFORM DUKUNGAN KREATOR</p>
-<h1>Dukung kreator favoritmu.</h1>
-<p>Kirim dukungan, pesan, dan video YouTube untuk kreator kesukaanmu melalui Donasiku.</p>
-<button onclick="show('creators')">Jelajahi Kreator</button>
-<button class="secondary" onclick="show('register')">Gabung sebagai Kreator</button>
-</div>
-<div class="grid">
-<div class="card"><h2>💚 Donasi</h2><p class="muted">Dukung kreator dengan pesan penyemangat.</p></div>
-<div class="card"><h2>🎬 Media Share</h2><p class="muted">Bagikan video YouTube favoritmu.</p></div>
-<div class="card"><h2>🎙️ Live Alert</h2><p class="muted">Notifikasi donasi ditampilkan secara langsung saat sistem pembayaran terhubung.</p></div>
-</div>
+  <div class="hero">
+    <div class="hero-art">💚</div>
+    <div class="hero-content">
+      <div class="eyebrow">BERBAGI KEBAIKAN, DUKUNG KREATIVITAS</div>
+      <h1>Dukungan kecil,<br>arti yang besar.</h1>
+      <p>Dukung kreator favoritmu, kirim pesan penyemangat, dan jadi bagian dari perjalanan mereka.</p>
+      <div class="hero-actions">
+        <button onclick="show('creators')">Temukan Kreator ↗</button>
+        <button class="secondary" onclick="show('register')">Jadi Kreator</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><strong>💚</strong><span>Berbagi kebaikan</span></div>
+        <div class="stat"><strong>🎨</strong><span>Dukung kreativitas</span></div>
+        <div class="stat"><strong>✨</strong><span>Sebarkan semangat</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="section-head"><div><h2>Kenapa donasistmr.net?</h2><p class="muted">Tempat dukunganmu jadi berarti.</p></div></div>
+  <div class="grid">
+    <div class="card feature"><div class="feature-icon">💚</div><h3>Dukung Kreator</h3><p class="muted">Kirim dukungan dan pesan positif untuk kreator favoritmu.</p></div>
+    <div class="card feature"><div class="feature-icon">🎬</div><h3>Media Share</h3><p class="muted">Tampilkan video YouTube di halaman kreator.</p></div>
+    <div class="card feature"><div class="feature-icon">🔔</div><h3>Donasi Alert</h3><p class="muted">Tampilkan notifikasi donasi dengan animasi menarik.</p></div>
+  </div>
 </section>
 
 <section id="creators" class="hidden">
-<div class="card">
-<h1>Daftar Kreator</h1>
-<p class="muted">Temukan kreator yang ingin kamu dukung.</p>
-<div id="creatorList" class="grid"></div>
-</div>
+  <div class="section-head"><div><h2>Temukan Kreator</h2><p class="muted">Dukung mereka untuk terus berkarya.</p></div><button onclick="show('register')">+ Daftar Kreator</button></div>
+  <div id="creatorList" class="grid"></div>
 </section>
 
 <section id="register" class="hidden">
-<div class="card">
-<h1>Daftar Kreator</h1>
-<p class="muted">Buat profil kreator Donasiku.</p>
-<label>Nama kreator</label><input id="regName" placeholder="Nama kamu">
-<label>Username</label><input id="regUser" placeholder="contoh: kreator123">
-<label>Deskripsi</label><textarea id="regBio" placeholder="Ceritakan tentang kontenmu"></textarea>
-<button onclick="register()">Buat Profil Demo</button>
-<button class="secondary" onclick="show('home')">Kembali</button>
-<p id="regMsg"></p>
-<p class="notice">Prototype: profil disimpan hanya di browser ini. Belum menjadi akun online.</p>
-</div>
+  <div class="card">
+    <div class="eyebrow">MULAI PERJALANANMU</div><h2>Buat Profil Kreator</h2><p class="muted">Ceritakan tentang dirimu dan kontenmu.</p>
+    <label>Nama kreator</label><input id="regName" placeholder="Nama kamu">
+    <label>Username</label><input id="regUser" placeholder="contoh: kreator123">
+    <label>Deskripsi</label><textarea id="regBio" placeholder="Ceritakan tentang kontenmu"></textarea>
+    <button onclick="register()">Buat Profil Demo</button><button class="secondary" onclick="show('home')">Kembali</button>
+    <p id="regMsg"></p><p class="notice">Profil demo disimpan di browser ini, belum menjadi akun online.</p>
+  </div>
 </section>
 
 <section id="login" class="hidden">
-<div class="card">
-<h1>Login Kreator</h1>
-<label>Username</label><input id="loginUser" placeholder="Username kreator">
-<button onclick="login()">Masuk ke Dashboard Demo</button>
-<button class="secondary" onclick="show('home')">Kembali</button>
-<p id="loginMsg"></p>
-</div>
+  <div class="card"><h2>Login Kreator</h2><p class="muted">Masuk ke dashboard kreatormu.</p>
+    <label>Username</label><input id="loginUser" placeholder="Username kreator">
+    <button onclick="login()">Masuk ke Dashboard Demo</button><button class="secondary" onclick="show('home')">Kembali</button><p id="loginMsg"></p>
+  </div>
 </section>
 
 <section id="dashboard" class="hidden">
-<div class="card">
-<h1>Dashboard Kreator</h1>
-<p>Halo, <b id="dashName"></b>!</p>
-<p class="muted" id="dashBio"></p>
-<h3>Link halaman donasi</h3>
-<p id="donationLink"></p>
-<button onclick="copyLink()">Salin Link</button>
-<button class="secondary" onclick="logout()">Logout</button>
-</div>
-<div class="card">
-<h2>Media Share</h2>
-<p class="muted">Pratinjau video YouTube.</p>
-<input id="youtubeUrl" placeholder="Tempel link YouTube">
-<button onclick="previewVideo()">Tampilkan Video</button>
-<div class="video" id="videoBox">Video akan tampil di sini</div>
-<p class="notice">Pratinjau saja. Belum terhubung ke live atau OBS.</p>
-</div>
-<div class="card">
-<h2>Notifikasi Donasi</h2>
-<p class="muted">Coba tampilan notifikasi dengan simulasi donasi.</p>
-<button onclick="testDonationAlert()">Tes Notifikasi</button>
-<p class="notice">Notifikasi ini hanya contoh, bukan pembayaran asli.</p>
-</div>
+  <div class="card"><div class="eyebrow">DASHBOARD KREATOR</div><h2>Halo, <span id="dashName"></span> 👋</h2><p class="muted" id="dashBio"></p>
+    <label>Link halaman donasi</label><p id="donationLink"></p><button onclick="copyLink()">Salin Link</button><button class="secondary" onclick="logout()">Logout</button>
+  </div>
+  <div class="card"><h2>🎬 Media Share</h2><p class="muted">Tampilkan video YouTube di halaman kreatormu.</p>
+    <input id="youtubeUrl" placeholder="Tempel link YouTube"><button onclick="previewVideo()">Tampilkan Video</button><div class="video" id="videoBox">Video akan tampil di sini</div>
+    <p class="notice">Pratinjau saja. Belum terhubung ke live atau OBS.</p>
+  </div>
+  <div class="card"><h2>🔔 Notifikasi Donasi</h2><p class="muted">Coba tampilan alert donasi di website.</p><button onclick="testDonationAlert()">Tes Notifikasi</button><p class="notice">Ini hanya simulasi, bukan pembayaran asli.</p></div>
 </section>
 
 <section id="donate" class="hidden">
-<div class="card">
-<h1>Dukung <span id="targetName"></span></h1>
-<p class="muted">Kirim pesan dukungan untuk kreator.</p>
-<label>Nama kamu</label><input id="donorName" placeholder="Nama pendukung">
-<label>Jumlah dukungan</label>
-<select id="donationAmount">
-<option value="5000">Rp5.000</option>
-<option value="10000">Rp10.000</option>
-<option value="20000">Rp20.000</option>
-<option value="50000">Rp50.000</option>
-</select>
-<label>Pesan</label><textarea id="donorMessage" placeholder="Tulis pesan dukungan"></textarea>
-<button onclick="demoDonate()">Kirim dukungan demo</button>
-<p id="donateMsg" class="notice"></p>
-<button class="secondary" onclick="show('creators')">Kembali</button>
-</div>
+  <div class="card">
+    <div class="eyebrow">KIRIM DUKUNGAN</div><h2>Dukung <span id="targetName"></span></h2><p class="muted">Setiap dukungan berarti untuk kreator.</p>
+    <label>Nama kamu</label><input id="donorName" placeholder="Nama pendukung">
+    <label>Jumlah dukungan</label>
+    <select id="donationAmount" onchange="updateFeeSummary()">
+      <option value="5000">Rp5.000</option><option value="10000">Rp10.000</option><option value="20000">Rp20.000</option><option value="50000">Rp50.000</option>
+    </select>
+    <div class="fee-summary">
+      <p><span>Donasi</span><strong id="donationBase">Rp5.000</strong></p>
+      <p><span>Biaya layanan 3%</span><strong id="serviceFee">Rp150</strong></p>
+      <p class="total"><span>Total pembayaran</span><strong id="paymentTotal">Rp5.150</strong></p>
+    </div>
+    <label>Pesan</label><textarea id="donorMessage" placeholder="Tulis pesan dukungan"></textarea>
+    <button onclick="demoDonate()">Kirim Dukungan Demo</button><p id="donateMsg" class="notice"></p><button class="secondary" onclick="show('creators')">Kembali</button>
+  </div>
 </section>
 
 <div id="donationAlert" class="donation-alert" aria-live="polite">
-<div class="alert-icon">💚</div>
-<div class="alert-content">
-<strong id="alertTitle">Donasi baru masuk!</strong>
-<p id="alertText"></p>
-<small id="alertMessage"></small>
-</div>
-<button class="alert-close" onclick="hideDonationAlert()">×</button>
+  <div class="alert-icon">💚</div><div class="alert-content"><strong id="alertTitle">Donasi baru masuk!</strong><p id="alertText"></p><small id="alertMessage"></small></div>
+  <button class="alert-close" onclick="hideDonationAlert()">×</button>
 </div>
 </main>
 
-<footer>© 2026 Donasiku · Dukung kreator, bagikan semangat.</footer>
+<footer>© 2026 donasistmr.net · Dukung kreator, bagikan semangat.</footer>
 
 <script>
 const sections=['home','creators','register','login','dashboard','donate'];
 let currentCreator='';
 
 function show(id){
-sections.forEach(s=>document.getElementById(s).classList.add('hidden'));
-document.getElementById(id).classList.remove('hidden');
-if(id==='creators')renderCreators();
+  sections.forEach(s=>document.getElementById(s).classList.add('hidden'));
+  document.getElementById(id).classList.remove('hidden');
+  if(id==='creators')renderCreators();
 }
-
 function getCreators(){
-try{return JSON.parse(localStorage.getItem('donasiku_creators')||'{}')}
-catch(e){return {}}
+  try{return JSON.parse(localStorage.getItem('donasiku_creators')||'{}')}catch(e){return {}}
 }
-
 function register(){
-let name=document.getElementById('regName').value.trim();
-let user=document.getElementById('regUser').value.trim().toLowerCase();
-let bio=document.getElementById('regBio').value.trim();
-let msg=document.getElementById('regMsg');
-if(!name||!user){msg.textContent='Isi nama dan username terlebih dahulu.';return}
-if(!/^[a-z0-9_]{3,20}$/.test(user)){msg.textContent='Username 3-20 karakter, gunakan huruf kecil, angka, atau _. ';return}
-let creators=getCreators();
-if(creators[user]){msg.textContent='Username sudah digunakan.';return}
-creators[user]={name,bio};
-localStorage.setItem('donasiku_creators',JSON.stringify(creators));
-msg.textContent='Profil demo berhasil dibuat. Silakan login.';
+  let name=document.getElementById('regName').value.trim();
+  let user=document.getElementById('regUser').value.trim().toLowerCase();
+  let bio=document.getElementById('regBio').value.trim();
+  let msg=document.getElementById('regMsg');
+  if(!name||!user){msg.textContent='Isi nama dan username terlebih dahulu.';return}
+  if(!/^[a-z0-9_]{3,20}$/.test(user)){msg.textContent='Username 3-20 karakter, gunakan huruf kecil, angka, atau _.';return}
+  let creators=getCreators();
+  if(creators[user]){msg.textContent='Username sudah digunakan.';return}
+  creators[user]={name,bio};localStorage.setItem('donasiku_creators',JSON.stringify(creators));
+  msg.textContent='Profil demo berhasil dibuat. Silakan login.';
 }
-
 function login(){
-let user=document.getElementById('loginUser').value.trim().toLowerCase();
-let creators=getCreators();
-if(!creators[user]){
-document.getElementById('loginMsg').textContent='Profil tidak ditemukan di browser ini.';
-return;
+  let user=document.getElementById('loginUser').value.trim().toLowerCase();
+  let creators=getCreators();
+  if(!creators[user]){document.getElementById('loginMsg').textContent='Profil tidak ditemukan di browser ini.';return}
+  currentCreator=user;dashboard();
 }
-currentCreator=user;
-dashboard();
-}
-
 function dashboard(){
-let c=getCreators()[currentCreator];
-if(!c)return show('home');
-document.getElementById('dashName').textContent=c.name;
-document.getElementById('dashBio').textContent=c.bio||'Kreator Donasiku';
-document.getElementById('donationLink').textContent=location.origin+location.pathname+'?kreator='+currentCreator;
-show('dashboard');
+  let c=getCreators()[currentCreator];if(!c)return show('home');
+  document.getElementById('dashName').textContent=c.name;
+  document.getElementById('dashBio').textContent=c.bio||'Kreator donasistmr.net';
+  document.getElementById('donationLink').textContent=location.origin+location.pathname+'?kreator='+currentCreator;
+  show('dashboard');
 }
-
 function logout(){currentCreator='';show('home')}
-
 function renderCreators(){
-let list=document.getElementById('creatorList');
-let creators=getCreators();
-let keys=Object.keys(creators);
-list.innerHTML='';
-if(!keys.length){list.textContent='Belum ada kreator terdaftar di browser ini.';return}
-keys.forEach(user=>{
-let c=creators[user];
-let div=document.createElement('div');
-div.className='creator';
-let h=document.createElement('h3');h.textContent=c.name;
-let p=document.createElement('p');p.textContent=c.bio||'Kreator Donasiku';
-let b=document.createElement('button');b.textContent='Dukung Kreator';
-b.onclick=()=>openDonation(user);
-div.append(h,p,b);list.appendChild(div);
-});
+  let list=document.getElementById('creatorList'),creators=getCreators(),keys=Object.keys(creators);list.innerHTML='';
+  if(!keys.length){list.textContent='Belum ada kreator terdaftar di browser ini.';return}
+  keys.forEach(user=>{
+    let c=creators[user],div=document.createElement('div');div.className='creator';
+    let cover=document.createElement('div');cover.className='creator-cover';
+    let body=document.createElement('div');body.className='creator-body';
+    let avatar=document.createElement('div');avatar.className='avatar';avatar.textContent=c.name.charAt(0).toUpperCase();
+    let h=document.createElement('h3');h.textContent=c.name;
+    let p=document.createElement('p');p.textContent=c.bio||'Kreator donasistmr.net';
+    let b=document.createElement('button');b.textContent='Dukung Kreator ↗';b.onclick=()=>openDonation(user);
+    body.append(avatar,h,p,b);div.append(cover,body);list.appendChild(div);
+  });
 }
-
-function openDonation(user){
-currentCreator=user;
-document.getElementById('targetName').textContent=getCreators()[user].name;
-show('donate');
+function openDonation(user){currentCreator=user;document.getElementById('targetName').textContent=getCreators()[user].name;show('donate')}
+function updateFeeSummary(){
+  const amount=Number(document.getElementById('donationAmount').value);
+  const fee=Math.round(amount*0.03),total=amount+fee;
+  const rupiah=n=>'Rp'+n.toLocaleString('id-ID');
+  document.getElementById('donationBase').textContent=rupiah(amount);
+  document.getElementById('serviceFee').textContent=rupiah(fee);
+  document.getElementById('paymentTotal').textContent=rupiah(total);
 }
-
 function demoDonate(){
-let name=document.getElementById('donorName').value.trim();
-let amount=document.getElementById('donationAmount').value;
-let message=document.getElementById('donorMessage').value.trim();
-let msg=document.getElementById('donateMsg');
-if(!name){msg.textContent='Isi nama kamu dahulu.';return}
-msg.textContent='Ini hanya simulasi. Pembayaran belum diproses.';
-showDonationAlert(name,amount,message);
+  let name=document.getElementById('donorName').value.trim();
+  let amount=document.getElementById('donationAmount').value;
+  let message=document.getElementById('donorMessage').value.trim();
+  if(!name){document.getElementById('donateMsg').textContent='Isi nama kamu dahulu.';return}
+  document.getElementById('donateMsg').textContent='Ini hanya simulasi. Pembayaran belum diproses.';
+  showDonationAlert(name,amount,message);
 }
-
 function showDonationAlert(name,amount,message){
-document.getElementById('alertTitle').textContent='Donasi baru masuk!';
-document.getElementById('alertText').textContent=name+' berdonasi Rp'+Number(amount).toLocaleString('id-ID');
-document.getElementById('alertMessage').textContent=message||'Terima kasih atas dukungannya!';
-document.getElementById('donationAlert').classList.add('active');
+  document.getElementById('alertTitle').textContent='Donasi baru masuk!';
+  document.getElementById('alertText').textContent=name+' berdonasi Rp'+Number(amount).toLocaleString('id-ID');
+  document.getElementById('alertMessage').textContent=message||'Terima kasih atas dukungannya!';
+  document.getElementById('donationAlert').classList.add('active');
 }
-
-function hideDonationAlert(){
-document.getElementById('donationAlert').classList.remove('active');
-}
-
-function testDonationAlert(){
-showDonationAlert('Pendukung Donasiku',50000,'Semangat terus!');
-}
-
+function hideDonationAlert(){document.getElementById('donationAlert').classList.remove('active')}
+function testDonationAlert(){showDonationAlert('Pendukung donasistmr.net',50000,'Semangat terus!')}
 function previewVideo(){
-let url=document.getElementById('youtubeUrl').value.trim();
-let id='';
-try{
-let u=new URL(url);
-if(u.hostname==='youtu.be')id=u.pathname.slice(1);
-else if(u.hostname.includes('youtube.com'))id=u.searchParams.get('v')||u.pathname.split('/').filter(Boolean).pop();
-}catch(e){}
-if(!/^[a-zA-Z0-9_-]{11}$/.test(id)){alert('Link YouTube tidak valid.');return}
-document.getElementById('videoBox').innerHTML='<iframe src="https://www.youtube.com/embed/'+id+'" allowfullscreen></iframe>';
+  let url=document.getElementById('youtubeUrl').value.trim(),id='';
+  try{let u=new URL(url);if(u.hostname==='youtu.be')id=u.pathname.slice(1);else if(u.hostname.includes('youtube.com'))id=u.searchParams.get('v')||u.pathname.split('/').filter(Boolean).pop()}catch(e){}
+  if(!/^[a-zA-Z0-9_-]{11}$/.test(id)){alert('Link YouTube tidak valid.');return}
+  document.getElementById('videoBox').innerHTML='<iframe src="https://www.youtube.com/embed/'+id+'" allowfullscreen></iframe>';
 }
-
 function copyLink(){
-let text=document.getElementById('donationLink').textContent;
-if(navigator.clipboard){navigator.clipboard.writeText(text).then(()=>alert('Link disalin.')).catch(()=>alert(text))}
-else alert(text);
+  let text=document.getElementById('donationLink').textContent;
+  if(navigator.clipboard){navigator.clipboard.writeText(text).then(()=>alert('Link disalin.')).catch(()=>alert(text))}else alert(text);
 }
-
 const params=new URLSearchParams(location.search);
-if(params.get('kreator')){
-let user=params.get('kreator');
-if(getCreators()[user])openDonation(user);
-}
+if(params.get('kreator')){let user=params.get('kreator');if(getCreators()[user])openDonation(user)}
+updateFeeSummary();
 </script>
 </body>
 </html>
