@@ -1,177 +1,316 @@
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DonasiSTMR</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#f4f6fb;color:#202538;font:16px system-ui,Arial}
-header{background:#5b35c8;color:white;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.brand{font-weight:800;font-size:20px}
-nav{display:flex;gap:8px;flex-wrap:wrap}
-button{border:0;border-radius:9px;padding:10px 13px;font:inherit;font-weight:700;cursor:pointer}
-.navbtn{background:white;color:#4b28b5}
-main{max-width:760px;margin:24px auto;padding:0 14px}
-.card{background:white;border-radius:16px;padding:20px;margin-bottom:16px;box-shadow:0 5px 24px #2025380c}
-h1{font-size:24px;margin:0 0 6px}
-h2{font-size:19px;margin-top:20px}
-.muted{color:#6c7285;font-size:14px}
-label{display:block;font-size:14px;font-weight:700;margin:14px 0 6px}
-input,textarea{width:100%;padding:12px;border:1px solid #d9dce7;border-radius:10px;font:inherit}
-textarea{min-height:84px;resize:vertical}
-.primary{width:100%;background:#5b35c8;color:white;padding:14px;margin-top:16px}
-.secondary{background:#eee9ff;color:#4b28b5}
-.video{position:relative;padding-top:56.25%;background:#171923;border-radius:12px;overflow:hidden}
-.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.amounts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}
-.amount{border:1px solid #d9dce7;background:white}
-.amount.active{border-color:#5b35c8;background:#f1edff;color:#4b28b5}
-.notice{display:none;margin-top:14px;padding:12px;border-radius:10px;background:#effaf1;color:#20652d}
+body{margin:0;background:#f4f5fa;color:#222;font-family:Arial,sans-serif}
+header{background:#5935c5;color:white;padding:17px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.logo{font-size:21px;font-weight:bold}
+nav{display:flex;gap:7px;flex-wrap:wrap}
+button{border:0;border-radius:9px;padding:11px 14px;font-weight:bold;cursor:pointer}
+nav button{background:white;color:#5935c5}
+main{max-width:720px;margin:25px auto;padding:0 14px}
+.page{background:white;padding:20px;border-radius:15px;margin-bottom:15px;box-shadow:0 4px 20px #0000000b}
+h1{font-size:24px;margin-top:0}
+h2{font-size:19px}
+p{line-height:1.5}
+label{display:block;margin:14px 0 6px;font-weight:bold;font-size:14px}
+input,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:9px;font-size:16px}
+textarea{min-height:80px}
+.primary{background:#5935c5;color:white;width:100%;margin-top:15px;padding:14px}
+.secondary{background:#eee9ff;color:#5935c5;margin-top:10px}
 .hidden{display:none!important}
-.history-item{border:1px solid #e5e6ed;border-radius:10px;padding:12px;margin:10px 0}
-.history-item strong{display:block}
-.history-date{font-size:12px;color:#777f92;margin-top:5px}
-.total{background:#f1edff;color:#4b28b5;padding:14px;border-radius:10px;font-weight:800}
-footer{text-align:center;color:#777f92;font-size:13px;padding:10px 0 28px}
+.muted{color:#777;font-size:14px}
+.notice{background:#eaf8ed;color:#21652e;padding:12px;border-radius:9px;margin-top:12px;display:none}
+.amounts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.amount{background:white;border:1px solid #ddd}
+.amount.active{background:#eee9ff;border-color:#5935c5;color:#5935c5}
+.video{position:relative;padding-top:56.25%;background:#222;border-radius:10px;overflow:hidden}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.history{padding:12px;border:1px solid #eee;border-radius:9px;margin:10px 0}
+.total{padding:15px;background:#eee9ff;color:#5935c5;border-radius:10px;font-weight:bold}
+footer{text-align:center;color:#888;padding:20px;font-size:13px}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="brand">DonasiSTMR</div>
+  <div class="logo">DonasiSTMR</div>
   <nav>
-    <button class="navbtn" onclick="showPage('home')">Beranda</button>
-    <button class="navbtn" onclick="showPage('register')">Daftar</button>
-    <button class="navbtn" onclick="showPage('login')">Masuk</button>
-    <button class="navbtn" onclick="showPage('dashboard')">Dashboard</button>
+    <button onclick="go('home')">Beranda</button>
+    <button onclick="go('register')">Daftar</button>
+    <button onclick="go('login')">Masuk</button>
+    <button onclick="go('dashboard')">Dashboard</button>
   </nav>
 </header>
 
 <main>
 
-<section id="home" class="card">
+<section id="home" class="page">
   <h1>Dukung Kreator</h1>
-  <p class="muted">Platform dukungan kreator DonasiSTMR.</p>
-  <p>Buat akun kreator dan bagikan profilmu kepada pendukung.</p>
-  <button class="primary" onclick="showPage('register')">Daftar Kreator</button>
+  <p>Platform demo untuk mendukung kreator favoritmu.</p>
+  <button class="primary" onclick="go('register')">Daftar sebagai Kreator</button>
+  <button class="secondary" onclick="go('login')">Masuk Akun</button>
 </section>
 
-<section id="register" class="card hidden">
+<section id="register" class="page hidden">
   <h1>Daftar Kreator</h1>
-  <p class="muted">Buat akun demo.</p>
   <form id="registerForm">
     <label>Nama kreator</label>
-    <input id="regName" maxlength="50" required placeholder="Nama kreator">
+    <input id="regName" required maxlength="50">
     <label>Nama pengguna</label>
-    <input id="regUser" maxlength="24" pattern="[A-Za-z0-9_-]+" required placeholder="contoh: kreator123">
+    <input id="regUser" required pattern="[A-Za-z0-9_-]+" maxlength="24">
     <label>Kata sandi demo</label>
-    <input id="regPass" type="password" minlength="4" required placeholder="Minimal 4 karakter">
-    <label>Link video YouTube (opsional)</label>
+    <input id="regPass" type="password" required minlength="4">
+    <label>Link YouTube (opsional)</label>
     <input id="regYoutube" type="url" placeholder="https://youtube.com/watch?v=...">
-    <button class="primary" type="submit">Buat Akun</button>
+    <button class="primary">Buat Akun</button>
   </form>
-  <div id="registerNotice" class="notice"></div>
+  <div id="registerMsg" class="notice"></div>
 </section>
 
-<section id="login" class="card hidden">
+<section id="login" class="page hidden">
   <h1>Masuk Kreator</h1>
   <form id="loginForm">
     <label>Nama pengguna</label>
     <input id="loginUser" required>
-    <label>Kata sandi</label>
+    <label>Kata sandi demo</label>
     <input id="loginPass" type="password" required>
-    <button class="primary" type="submit">Masuk</button>
+    <button class="primary">Masuk</button>
   </form>
-  <div id="loginNotice" class="notice"></div>
+  <div id="loginMsg" class="notice"></div>
 </section>
 
-<section id="dashboard" class="card hidden">
+<section id="dashboard" class="page hidden">
   <h1>Dashboard Kreator</h1>
   <p id="welcome" class="muted"></p>
 
   <label>Nama tampilan</label>
-  <input id="editName" maxlength="50">
+  <input id="editName">
 
   <label>Link video YouTube</label>
-  <input id="editYoutube" type="url" placeholder="Link YouTube">
+  <input id="editYoutube" type="url">
 
   <button class="primary" onclick="saveProfile()">Simpan Profil</button>
 
-  <label>Link profil kreator</label>
+  <label>Link profil kamu</label>
   <input id="profileLink" readonly>
-  <button class="secondary" onclick="copyProfileLink()">Salin Link Profil</button>
+  <button class="secondary" onclick="copyLink()">Salin Link Profil</button>
 
-  <hr>
   <h2>Riwayat Donasi</h2>
-  <div class="total" id="donationTotal">Total dukungan demo: Rp0</div>
-  <div id="donationHistory">
-    <p class="muted">Belum ada dukungan.</p>
-  </div>
+  <div class="total" id="total">Total dukungan: Rp0</div>
+  <div id="history"></div>
 
-  <button class="secondary" onclick="logout()" style="margin-top:15px">Keluar</button>
-  <div id="dashboardNotice" class="notice"></div>
+  <button class="secondary" onclick="logout()">Keluar Akun</button>
+  <div id="dashMsg" class="notice"></div>
 </section>
 
-<section id="creator" class="card hidden">
-  <h1 id="creatorTitle">Dukung Kreator</h1>
-  <p class="muted">Dukungan ini masih berupa simulasi demo.</p>
+<section id="creator" class="page hidden">
+  <h1 id="creatorName">Dukung Kreator</h1>
+  <p class="muted">Tonton video dan kirim dukungan demo.</p>
 
   <div class="video" id="videoBox"></div>
   <p id="noVideo" class="muted">Kreator belum menambahkan video.</p>
 
   <label>Nama pendukung</label>
-  <input id="donorName" maxlength="40" placeholder="Nama atau anonim">
+  <input id="donorName" placeholder="Nama atau anonim" maxlength="40">
 
   <label>Pesan dukungan</label>
   <textarea id="donorMessage" maxlength="200" placeholder="Tulis pesan..."></textarea>
 
   <label>Pilih nominal</label>
   <div class="amounts">
-    <button class="amount active" type="button" data-amount="5000">Rp5.000</button>
-    <button class="amount" type="button" data-amount="10000">Rp10.000</button>
-    <button class="amount" type="button" data-amount="20000">Rp20.000</button>
+    <button class="amount active" data-value="5000">Rp5.000</button>
+    <button class="amount" data-value="10000">Rp10.000</button>
+    <button class="amount" data-value="20000">Rp20.000</button>
   </div>
 
-  <label>Nominal lainnya (Rp)</label>
+  <label>Nominal lainnya</label>
   <input id="customAmount" type="number" min="1000" max="1000000" placeholder="Minimal Rp1.000">
 
-  <button class="primary" onclick="simulateDonation()">Kirim Donasi Demo</button>
-  <div id="donationNotice" class="notice"></div>
+  <button class="primary" onclick="donate()">Kirim Donasi Demo</button>
+  <div id="donateMsg" class="notice"></div>
 </section>
 
-<footer>DonasiSTMR · Mode Demo · Tidak memproses pembayaran asli.</footer>
 </main>
+<footer>DonasiSTMR — Versi Demo</footer>
 
 <script>
 const $ = id => document.getElementById(id);
 
-const getUsers = () =>
-  JSON.parse(localStorage.getItem("dstmr_users") || "{}");
+function read(key, fallback) {
+  try {
+    return JSON.parse(localStorage.getItem(key)) ?? fallback;
+  } catch {
+    return fallback;
+  }
+}
 
-const setUsers = users =>
-  localStorage.setItem("dstmr_users", JSON.stringify(users));
+function users() {
+  return read("dstmr_users", {});
+}
 
-const getDonations = () =>
-  JSON.parse(localStorage.getItem("dstmr_donations") || "{}");
+function donations() {
+  return read("dstmr_donations", {});
+}
 
-let currentUser = localStorage.getItem("dstmr_current") || "";
-let selectedAmount = 5000;
-let viewedCreator = "";
+let current = localStorage.getItem("dstmr_current") || "";
+let selected = 5000;
+let creator = "";
 
-function showPage(id) {
-  document.querySelectorAll("main > section").forEach(s =>
-    s.classList.add("hidden")
-  );
+function message(id, text) {
+  $(id).textContent = text;
+  $(id).style.display = "block";
+}
+
+function go(id) {
+  document.querySelectorAll("main > section").forEach(section => {
+    section.classList.add("hidden");
+  });
+
   $(id).classList.remove("hidden");
 
   if (id === "dashboard") loadDashboard();
 }
 
-function notice(id, text) {
-  $(id).textContent = text;
-  $(id).style.display = "block";
+function register(e) {
+  e.preventDefault();
+
+  const data = users();
+  const username = $("regUser").value.trim().toLowerCase();
+
+  if (data[username]) {
+    message("registerMsg", "Nama pengguna sudah digunakan.");
+    return;
+  }
+
+  data[username] = {
+    name: $("regName").value.trim(),
+    password: $("regPass").value,
+    youtube: $("regYoutube").value.trim()
+  };
+
+  localStorage.setItem("dstmr_users", JSON.stringify(data));
+  current = username;
+  localStorage.setItem("dstmr_current", current);
+
+  $("registerForm").reset();
+  go("dashboard");
+}
+
+function login(e) {
+  e.preventDefault();
+
+  const username = $("loginUser").value.trim().toLowerCase();
+  const password = $("loginPass").value;
+  const user = users()[username];
+
+  if (!user || user.password !== password) {
+    message("loginMsg", "Nama pengguna atau kata sandi salah.");
+    return;
+  }
+
+  current = username;
+  localStorage.setItem("dstmr_current", current);
+  $("loginForm").reset();
+  go("dashboard");
+}
+
+function loadDashboard() {
+  const user = users()[current];
+
+  if (!user) {
+    $("welcome").textContent = "Silakan masuk atau daftar terlebih dahulu.";
+    $("editName").value = "";
+    $("editYoutube").value = "";
+    $("profileLink").value = "";
+    $("total").textContent = "Total dukungan: Rp0";
+    $("history").textContent = "Masuk untuk melihat riwayat.";
+    return;
+  }
+
+  $("welcome").textContent = "Selamat datang, " + user.name;
+  $("editName").value = user.name;
+  $("editYoutube").value = user.youtube || "";
+  $("profileLink").value =
+    location.href.split("#")[0] + "#creator=" + encodeURIComponent(current);
+
+  renderHistory();
+}
+
+function saveProfile() {
+  const data = users();
+
+  if (!data[current]) {
+    message("dashMsg", "Silakan masuk terlebih dahulu.");
+    return;
+  }
+
+  data[current].name = $("editName").value.trim() || current;
+  data[current].youtube = $("editYoutube").value.trim();
+
+  localStorage.setItem("dstmr_users", JSON.stringify(data));
+  loadDashboard();
+  message("dashMsg", "Profil berhasil disimpan.");
+}
+
+function copyLink() {
+  const link = $("profileLink").value;
+
+  if (!link) return message("dashMsg", "Masuk terlebih dahulu.");
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(link)
+      .then(() => message("dashMsg", "Link berhasil disalin."))
+      .catch(() => message("dashMsg", "Silakan salin link dari kolom."));
+  } else {
+    message("dashMsg", "Silakan salin link dari kolom.");
+  }
+}
+
+function logout() {
+  current = "";
+  localStorage.removeItem("dstmr_current");
+  go("home");
+}
+
+function renderHistory() {
+  const list = donations()[current] || [];
+  const total = list.reduce((sum, item) => sum + item.amount, 0);
+
+  $("total").textContent =
+    "Total dukungan demo: Rp" + total.toLocaleString("id-ID");
+
+  $("history").innerHTML = "";
+
+  if (!list.length) {
+    $("history").textContent = "Belum ada donasi.";
+    return;
+  }
+
+  [...list].reverse().forEach(item => {
+    const div = document.createElement("div");
+    div.className = "history";
+
+    const name = document.createElement("strong");
+    name.textContent = item.name;
+
+    const amount = document.createElement("p");
+    amount.textContent = "Rp" + item.amount.toLocaleString("id-ID");
+
+    const note = document.createElement("p");
+    note.textContent = item.message || "Tanpa pesan";
+
+    const date = document.createElement("small");
+    date.textContent = item.date;
+
+    div.append(name, amount, note, date);
+    $("history").appendChild(div);
+  });
 }
 
 function youtubeId(url) {
@@ -182,277 +321,120 @@ function youtubeId(url) {
       return u.pathname.slice(1).split("/")[0];
 
     if (u.hostname.includes("youtube.com")) {
-      if (u.pathname === "/watch")
-        return u.searchParams.get("v") || "";
+      if (u.pathname === "/watch") return u.searchParams.get("v") || "";
 
       const parts = u.pathname.split("/");
-
-      if (["embed","shorts"].includes(parts[1]))
-        return parts[2] || "";
+      if (["embed", "shorts"].includes(parts[1])) return parts[2] || "";
     }
   } catch {}
 
   return "";
 }
 
-// DAFTAR
-$("registerForm").addEventListener("submit", e => {
-  e.preventDefault();
-
-  const users = getUsers();
-  const username = $("regUser").value.trim().toLowerCase();
-
-  if (users[username])
-    return notice("registerNotice", "Nama pengguna sudah digunakan.");
-
-  users[username] = {
-    name: $("regName").value.trim(),
-    password: $("regPass").value,
-    youtube: $("regYoutube").value.trim()
-  };
-
-  setUsers(users);
-
-  currentUser = username;
-  localStorage.setItem("dstmr_current", username);
-
-  notice("registerNotice", "Akun demo berhasil dibuat.");
-  showPage("dashboard");
-});
-
-// LOGIN
-$("loginForm").addEventListener("submit", e => {
-  e.preventDefault();
-
-  const username = $("loginUser").value.trim().toLowerCase();
-  const user = getUsers()[username];
-
-  if (!user || user.password !== $("loginPass").value)
-    return notice("loginNotice", "Nama pengguna atau kata sandi salah.");
-
-  currentUser = username;
-  localStorage.setItem("dstmr_current", username);
-
-  showPage("dashboard");
-});
-
-// DASHBOARD
-function loadDashboard() {
-  const user = getUsers()[currentUser];
-
-  if (!user) {
-    $("welcome").textContent = "Silakan masuk atau daftar terlebih dahulu.";
-    $("editName").value = "";
-    $("editYoutube").value = "";
-    $("profileLink").value = "";
-    $("donationTotal").textContent = "Total dukungan demo: Rp0";
-    $("donationHistory").innerHTML =
-      '<p class="muted">Masuk untuk melihat riwayat.</p>';
-    return;
-  }
-
-  $("welcome").textContent = "Masuk sebagai @" + currentUser;
-  $("editName").value = user.name;
-  $("editYoutube").value = user.youtube || "";
-
-  $("profileLink").value =
-    location.href.split("#")[0] +
-    "#creator=" + encodeURIComponent(currentUser);
-
-  renderDonationHistory();
-}
-
-function saveProfile() {
-  const users = getUsers();
-
-  if (!users[currentUser])
-    return notice("dashboardNotice", "Silakan masuk terlebih dahulu.");
-
-  users[currentUser].name =
-    $("editName").value.trim() || currentUser;
-
-  users[currentUser].youtube =
-    $("editYoutube").value.trim();
-
-  setUsers(users);
-  loadDashboard();
-
-  notice("dashboardNotice", "Profil berhasil disimpan.");
-}
-
-function copyProfileLink() {
-  const link = $("profileLink").value;
-
-  if (!link)
-    return notice("dashboardNotice", "Masuk terlebih dahulu.");
-
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(link)
-      .then(() => notice("dashboardNotice", "Link berhasil disalin."))
-      .catch(() => notice("dashboardNotice", "Salin link dari kolom."));
-  } else {
-    notice("dashboardNotice", "Salin link dari kolom.");
-  }
-}
-
-function logout() {
-  currentUser = "";
-  localStorage.removeItem("dstmr_current");
-  showPage("home");
-}
-
-// RIWAYAT DONASI
-function renderDonationHistory() {
-  const all = getDonations();
-  const donations = all[currentUser] || [];
-
-  const total = donations.reduce(
-    (sum, d) => sum + d.amount, 0
-  );
-
-  $("donationTotal").textContent =
-    "Total dukungan demo: Rp" + total.toLocaleString("id-ID");
-
-  const box = $("donationHistory");
-  box.innerHTML = "";
-
-  if (!donations.length) {
-    box.innerHTML =
-      '<p class="muted">Belum ada dukungan yang masuk.</p>';
-    return;
-  }
-
-  [...donations].reverse().forEach(d => {
-    const item = document.createElement("div");
-    item.className = "history-item";
-
-    const name = document.createElement("strong");
-    name.textContent = d.name;
-
-    const amount = document.createElement("div");
-    amount.textContent =
-      "Rp" + d.amount.toLocaleString("id-ID");
-
-    const message = document.createElement("p");
-    message.textContent = d.message || "Tanpa pesan";
-    message.className = "muted";
-
-    const date = document.createElement("div");
-    date.className = "history-date";
-    date.textContent = d.date;
-
-    item.append(name, amount, message, date);
-    box.appendChild(item);
-  });
-}
-
-// HALAMAN KREATOR
 function openCreator(username) {
-  const user = getUsers()[username];
+  const user = users()[username];
 
   if (!user) {
-    showPage("home");
+    go("home");
     return;
   }
 
-  viewedCreator = username;
-  $("creatorTitle").textContent = "Dukung " + user.name;
+  creator = username;
+  $("creatorName").textContent = "Dukung " + user.name;
 
   const id = youtubeId(user.youtube || "");
 
   $("videoBox").innerHTML = id
-    ? `<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}" title="Video kreator" allowfullscreen></iframe>`
+    ? '<iframe src="https://www.youtube-nocookie.com/embed/' +
+      encodeURIComponent(id) +
+      '" allowfullscreen title="Video kreator"></iframe>'
     : "";
 
   $("noVideo").style.display = id ? "none" : "block";
-  $("donationNotice").style.display = "none";
-
   $("donorName").value = "";
   $("donorMessage").value = "";
   $("customAmount").value = "";
+  $("donateMsg").style.display = "none";
 
-  selectedAmount = 5000;
+  selected = 5000;
 
-  document.querySelectorAll(".amount").forEach(b =>
-    b.classList.toggle("active", Number(b.dataset.amount) === 5000)
-  );
+  document.querySelectorAll(".amount").forEach(button => {
+    button.classList.toggle(Number(button.dataset.value) === selected);
+  });
 
-  showPage("creator");
+  go("creator");
 }
 
-// PILIH NOMINAL
 document.querySelectorAll(".amount").forEach(button => {
   button.addEventListener("click", () => {
-    selectedAmount = Number(button.dataset.amount);
+    selected = Number(button.dataset.value);
     $("customAmount").value = "";
 
-    document.querySelectorAll(".amount").forEach(b =>
-      b.classList.toggle("active", b === button)
-    );
+    document.querySelectorAll(".amount").forEach(b => {
+      b.classList.toggle("active", b === button);
+    });
   });
 });
 
 $("customAmount").addEventListener("input", () => {
-  document.querySelectorAll(".amount").forEach(b =>
-    b.classList.remove("active")
-  );
+  document.querySelectorAll(".amount").forEach(b => b.classList.remove("active"));
 });
 
-// KIRIM DONASI DEMO
-function simulateDonation() {
-  if (!viewedCreator || !getUsers()[viewedCreator])
-    return notice("donationNotice", "Kreator tidak ditemukan.");
+function donate() {
+  if (!creator || !users()[creator]) {
+    message("donateMsg", "Kreator tidak ditemukan.");
+    return;
+  }
 
   const amount = $("customAmount").value
     ? Number($("customAmount").value)
-    : selectedAmount;
+    : selected;
 
-  if (!Number.isInteger(amount) || amount < 1000 || amount > 1000000)
-    return notice("donationNotice", "Nominal harus Rp1.000 sampai Rp1.000.000.");
+  if (!Number.isInteger(amount) || amount < 1000 || amount > 1000000) {
+    message("donateMsg", "Nominal minimal Rp1.000 dan maksimal Rp1.000.000.");
+    return;
+  }
 
-  const name = $("donorName").value.trim() || "Anonim";
-  const message = $("donorMessage").value.trim();
+  const all = donations();
 
-  const all = getDonations();
+  if (!all[creator]) all[creator] = [];
 
-  if (!all[viewedCreator])
-    all[viewedCreator] = [];
-
-  all[viewedCreator].push({
-    name: name,
+  all[creator].push({
+    name: $("donorName").value.trim() || "Anonim",
+    message: $("donorMessage").value.trim(),
     amount: amount,
-    message: message,
     date: new Date().toLocaleString("id-ID")
   });
 
   localStorage.setItem("dstmr_donations", JSON.stringify(all));
 
-  notice(
-    "donationNotice",
-    "Terima kasih! Donasi demo Rp" +
-    amount.toLocaleString("id-ID") +
+  message(
+    "donateMsg",
+    "Donasi demo Rp" + amount.toLocaleString("id-ID") +
     " berhasil dicatat. Tidak ada uang yang dibayarkan."
   );
 }
 
-// LINK PROFIL
-function checkHash() {
+$("registerForm").addEventListener("submit", register);
+$("loginForm").addEventListener("submit", login);
+
+function checkLink() {
   const match = location.hash.match(/^#creator=(.+)$/);
 
   if (match) {
     try {
       openCreator(decodeURIComponent(match[1]));
     } catch {
-      showPage("home");
+      go("home");
     }
   } else {
-    showPage("home");
+    go("home");
   }
 }
 
-window.addEventListener("hashchange", checkHash);
-checkHash();
-
+window.addEventListener("hashchange", checkLink);
+checkLink();
 </script>
+
 </body>
 </html>
