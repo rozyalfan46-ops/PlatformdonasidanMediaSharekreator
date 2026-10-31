@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Donasiku - Platform Kreator</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#081426;color:#f4f7ff;font-family:Arial,sans-serif}
+header{padding:24px;background:#10233b;border-bottom:1px solid #29435e}
+.logo{font-size:32px;font-weight:bold;color:#54e0c0}
+.logo span{color:#ffad55}
+main{max-width:850px;margin:25px auto;padding:16px}
+.card{background:#10233b;padding:24px;border-radius:20px;margin-bottom:18px}
+h1,h2{margin-top:0}
+p{color:#b8c8d9;line-height:1.6}
+input{width:100%;padding:14px;margin:8px 0 16px;border:1px solid #45617c;border-radius:10px;background:#081426;color:white;font-size:16px}
+button{padding:13px 18px;border:0;border-radius:10px;background:#54e0c0;color:#081426;font-weight:bold;font-size:15px;margin:4px;cursor:pointer}
+.secondary{background:#29435e;color:white}
+.hidden{display:none}
+a{color:#54e0c0}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">dona<span>siku</span></div>
+<p>Dukung kreator. Bagikan semangat.</p>
+</header>
+<main>
+<section class="card" id="home">
+<h1>Selamat datang di Donasiku!</h1>
+<p>Platform dukungan untuk kreator dan streamer Indonesia.</p>
+<button onclick="show('register')">Daftar Kreator</button>
+<button class="secondary" onclick="show('login')">Login</button>
+</section>
+
+<section class="card hidden" id="register">
+<h2>Daftar Kreator</h2>
+<input id="regName" placeholder="Nama kreator">
+<input id="regUser" placeholder="Username unik">
+<input id="regEmail" type="email" placeholder="Email">
+<input id="regPass" type="password" placeholder="Password">
+<button onclick="register()">Buat Akun</button>
+<button class="secondary" onclick="show('home')">Kembali</button>
+<p id="regMsg"></p>
+</section>
+
+<section class="card hidden" id="login">
+<h2>Login Kreator</h2>
+<input id="loginUser" placeholder="Username">
+<input id="loginPass" type="password" placeholder="Password">
+<button onclick="login()">Masuk</button>
+<button class="secondary" onclick="show('home')">Kembali</button>
+<p id="loginMsg"></p>
+</section>
+
+<section class="card hidden" id="dashboard">
+<h2>Dashboard Kreator</h2>
+<p>Selamat datang, <b id="creatorName"></b>!</p>
+<p>Username: <b id="creatorUser"></b></p>
+<h3>Halaman donasi kamu</h3>
+<p id="creatorLink"></p>
+<button onclick="copyLink()">Salin Link Donasi</button>
+<button class="secondary" onclick="logout()">Logout</button>
+</section>
+
+<section class="card">
+<h2>Fitur Donasiku</h2>
+<p>• Halaman donasi pribadi kreator</p>
+<p>• Dashboard kreator</p>
+<p>• Media Share YouTube</p>
+<p>• Notifikasi donasi dan OBS (tahap pengembangan)</p>
+</section>
+</main>
+<script>
+function show(id){
+document.querySelectorAll('main section').forEach(x=>x.classList.add('hidden'));
+document.getElementById(id).classList.remove('hidden');
+}
+function register(){
+let name=document.getElementById('regName').value.trim();
+let user=document.getElementById('regUser').value.trim().toLowerCase();
+let email=document.getElementById('regEmail').value.trim();
+let pass=document.getElementById('regPass').value;
+let msg=document.getElementById('regMsg');
+if(!name||!user||!email||!pass){msg.textContent='Lengkapi semua kolom.';return}
+if(!/^[a-z0-9_]{3,20}$/.test(user)){msg.textContent='Username 3-20 karakter, huruf kecil, angka atau _. ';return}
+let accounts=JSON.parse(localStorage.getItem('donasiku_demo')||'{}');
+if(accounts[user]){msg.textContent='Username sudah digunakan.';return}
+accounts[user]={name,email,pass};
+localStorage.setItem('donasiku_demo',JSON.stringify(accounts));
+msg.textContent='Akun demo berhasil dibuat. Silakan login.';
+}
+function login(){
+let user=document.getElementById('loginUser').value.trim().toLowerCase();
+let pass=document.getElementById('loginPass').value;
+let accounts=JSON.parse(localStorage.getItem('donasiku_demo')||'{}');
+if(!accounts[user]||accounts[user].pass!==pass){
+document.getElementById('loginMsg').textContent='Username atau password salah.';
+return;
+}
+sessionStorage.setItem('donasiku_user',user);
+dashboard();
+}
+function dashboard(){
+let user=sessionStorage.getItem('donasiku_user');
+let accounts=JSON.parse(localStorage.getItem('donasiku_demo')||'{}');
+if(!user||!accounts[user])return show('home');
+document.getElementById('creatorName').textContent=accounts[user].name;
+document.getElementById('creatorUser').textContent=user;
+document.getElementById('creatorLink').textContent=location.href.split('?')[0]+'?kreator='+user;
+show('dashboard');
+}
+function copyLink(){
+let text=document.getElementById('creatorLink').textContent;
+if(navigator.clipboard)navigator.clipboard.writeText(text).then(()=>alert('Link disalin!'));
+else alert(text);
+}
+function logout(){
+sessionStorage.removeItem('donasiku_user');
+show('home');
+}
+if(sessionStorage.getItem('donasiku_user'))dashboard();
+</script>
+</body>
+</html>
