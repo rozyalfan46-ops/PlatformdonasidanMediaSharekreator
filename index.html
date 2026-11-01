@@ -1,439 +1,370 @@
 
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DonasiSTMR</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALFANSTORE.id - Top Up Game</title>
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#f4f5fa;color:#222;font-family:Arial,sans-serif}
-header{background:#5935c5;color:white;padding:17px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-.logo{font-size:21px;font-weight:bold}
-nav{display:flex;gap:7px;flex-wrap:wrap}
-button{border:0;border-radius:9px;padding:11px 14px;font-weight:bold;cursor:pointer}
-nav button{background:white;color:#5935c5}
-main{max-width:720px;margin:25px auto;padding:0 14px}
-.page{background:white;padding:20px;border-radius:15px;margin-bottom:15px;box-shadow:0 4px 20px #0000000b}
-h1{font-size:24px;margin-top:0}
-h2{font-size:19px}
-p{line-height:1.5}
-label{display:block;margin:14px 0 6px;font-weight:bold;font-size:14px}
-input,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:9px;font-size:16px}
-textarea{min-height:80px}
-.primary{background:#5935c5;color:white;width:100%;margin-top:15px;padding:14px}
-.secondary{background:#eee9ff;color:#5935c5;margin-top:10px}
-.hidden{display:none!important}
-.muted{color:#777;font-size:14px}
-.notice{background:#eaf8ed;color:#21652e;padding:12px;border-radius:9px;margin-top:12px;display:none}
-.amounts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
-.amount{background:white;border:1px solid #ddd}
-.amount.active{background:#eee9ff;border-color:#5935c5;color:#5935c5}
-.video{position:relative;padding-top:56.25%;background:#222;border-radius:10px;overflow:hidden}
-.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.history{padding:12px;border:1px solid #eee;border-radius:9px;margin:10px 0}
-.total{padding:15px;background:#eee9ff;color:#5935c5;border-radius:10px;font-weight:bold}
-footer{text-align:center;color:#888;padding:20px;font-size:13px}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #080d19;
+  color: white;
+}
+
+header {
+  padding: 20px;
+  background: #111a2e;
+  border-bottom: 1px solid #263653;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 23px;
+  font-weight: bold;
+}
+
+.logo span {
+  color: #22d3ee;
+}
+
+.badge {
+  color: #22d3ee;
+  font-size: 12px;
+}
+
+.hero {
+  margin: 20px;
+  padding: 30px 20px;
+  border-radius: 18px;
+  background: linear-gradient(120deg,#24134d,#123b58);
+}
+
+.hero h1 {
+  font-size: 30px;
+}
+
+.hero p {
+  color: #c5d1e5;
+}
+
+.container {
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+.games {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 10px;
+}
+
+.game {
+  background: #15213a;
+  border: 1px solid #344563;
+  border-radius: 12px;
+  padding: 15px 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.game.active {
+  border: 2px solid #22d3ee;
+  background: #103047;
+}
+
+.game span {
+  display: block;
+  font-size: 27px;
+  margin-bottom: 7px;
+}
+
+.panel {
+  margin-top: 20px;
+  padding: 20px;
+  background: #111a2e;
+  border: 1px solid #263653;
+  border-radius: 15px;
+}
+
+label {
+  display: block;
+  margin: 15px 0 7px;
+  color: #c5d1e5;
+}
+
+input {
+  width: 100%;
+  padding: 13px;
+  background: #080d19;
+  border: 1px solid #344563;
+  border-radius: 9px;
+  color: white;
+  font-size: 15px;
+}
+
+.nominals {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 10px;
+}
+
+.nominal {
+  background: #0b1425;
+  border: 1px solid #344563;
+  color: white;
+  padding: 13px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.nominal.active {
+  border: 2px solid #22d3ee;
+  background: #103047;
+}
+
+.nominal small {
+  display: block;
+  color: #9aa9c2;
+  margin-top: 5px;
+}
+
+.price {
+  color: #22d3ee;
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+.checkout {
+  width: 100%;
+  margin-top: 20px;
+  padding: 15px;
+  border: 0;
+  border-radius: 10px;
+  background: linear-gradient(90deg,#7c3aed,#2563eb);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.checkout:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+.result {
+  display: none;
+  margin-top: 15px;
+  padding: 15px;
+  background: #10352d;
+  border: 1px solid #16805d;
+  border-radius: 10px;
+  color: #a7f3d0;
+}
+
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #9aa9c2;
+  font-size: 12px;
+}
 </style>
 </head>
+
 <body>
 
 <header>
-  <div class="logo">DonasiSTMR</div>
-  <nav>
-    <button onclick="go('home')">Beranda</button>
-    <button onclick="go('register')">Daftar</button>
-    <button onclick="go('login')">Masuk</button>
-    <button onclick="go('dashboard')">Dashboard</button>
-  </nav>
+  <div class="logo">ALFANSTORE<span>.id</span></div>
+  <div class="badge">⚡ TOP UP GAME</div>
 </header>
 
-<main>
-
-<section id="home" class="page">
-  <h1>Dukung Kreator</h1>
-  <p>Platform demo untuk mendukung kreator favoritmu.</p>
-  <button class="primary" onclick="go('register')">Daftar sebagai Kreator</button>
-  <button class="secondary" onclick="go('login')">Masuk Akun</button>
+<section class="hero">
+  <h1>TOP UP GAME FAVORITMU</h1>
+  <p>Cepat, mudah, dan praktis bersama ALFANSTORE.id</p>
 </section>
 
-<section id="register" class="page hidden">
-  <h1>Daftar Kreator</h1>
-  <form id="registerForm">
-    <label>Nama kreator</label>
-    <input id="regName" required maxlength="50">
-    <label>Nama pengguna</label>
-    <input id="regUser" required pattern="[A-Za-z0-9_-]+" maxlength="24">
-    <label>Kata sandi demo</label>
-    <input id="regPass" type="password" required minlength="4">
-    <label>Link YouTube (opsional)</label>
-    <input id="regYoutube" type="url" placeholder="https://youtube.com/watch?v=...">
-    <button class="primary">Buat Akun</button>
-  </form>
-  <div id="registerMsg" class="notice"></div>
-</section>
+<div class="container">
 
-<section id="login" class="page hidden">
-  <h1>Masuk Kreator</h1>
-  <form id="loginForm">
-    <label>Nama pengguna</label>
-    <input id="loginUser" required>
-    <label>Kata sandi demo</label>
-    <input id="loginPass" type="password" required>
-    <button class="primary">Masuk</button>
-  </form>
-  <div id="loginMsg" class="notice"></div>
-</section>
+<h2>1. Pilih Game</h2>
 
-<section id="dashboard" class="page hidden">
-  <h1>Dashboard Kreator</h1>
-  <p id="welcome" class="muted"></p>
+<div class="games">
+  <button class="game active" data-game="Mobile Legends">
+    <span>⚔️</span>Mobile Legends
+  </button>
 
-  <label>Nama tampilan</label>
-  <input id="editName">
+  <button class="game" data-game="Free Fire">
+    <span>🔥</span>Free Fire
+  </button>
 
-  <label>Link video YouTube</label>
-  <input id="editYoutube" type="url">
+  <button class="game" data-game="PUBG Mobile">
+    <span>🎯</span>PUBG Mobile
+  </button>
+</div>
 
-  <button class="primary" onclick="saveProfile()">Simpan Profil</button>
+<div class="panel">
 
-  <label>Link profil kamu</label>
-  <input id="profileLink" readonly>
-  <button class="secondary" onclick="copyLink()">Salin Link Profil</button>
+<h2>2. Data Akun</h2>
 
-  <h2>Riwayat Donasi</h2>
-  <div class="total" id="total">Total dukungan: Rp0</div>
-  <div id="history"></div>
+<label>User ID</label>
+<input id="player" placeholder="Masukkan User ID">
 
-  <button class="secondary" onclick="logout()">Keluar Akun</button>
-  <div id="dashMsg" class="notice"></div>
-</section>
+<label>Server / Zone ID</label>
+<input id="server" placeholder="Masukkan Server ID jika diperlukan">
 
-<section id="creator" class="page hidden">
-  <h1 id="creatorName">Dukung Kreator</h1>
-  <p class="muted">Tonton video dan kirim dukungan demo.</p>
+<h2>3. Pilih Nominal</h2>
 
-  <div class="video" id="videoBox"></div>
-  <p id="noVideo" class="muted">Kreator belum menambahkan video.</p>
+<div class="nominals" id="nominals"></div>
 
-  <label>Nama pendukung</label>
-  <input id="donorName" placeholder="Nama atau anonim" maxlength="40">
+<div class="price" id="price">Pilih nominal dahulu</div>
 
-  <label>Pesan dukungan</label>
-  <textarea id="donorMessage" maxlength="200" placeholder="Tulis pesan..."></textarea>
+<button class="checkout" id="checkout" disabled>
+  BUAT PESANAN DEMO
+</button>
 
-  <label>Pilih nominal</label>
-  <div class="amounts">
-    <button class="amount active" data-value="5000">Rp5.000</button>
-    <button class="amount" data-value="10000">Rp10.000</button>
-    <button class="amount" data-value="20000">Rp20.000</button>
-  </div>
+<div class="result" id="result"></div>
 
-  <label>Nominal lainnya</label>
-  <input id="customAmount" type="number" min="1000" max="1000000" placeholder="Minimal Rp1.000">
+<p style="color:#9aa9c2;font-size:12px">
+  Mode demo. Belum ada pembayaran atau pengiriman diamond sungguhan.
+</p>
 
-  <button class="primary" onclick="donate()">Kirim Donasi Demo</button>
-  <div id="donateMsg" class="notice"></div>
-</section>
+</div>
+</div>
 
-</main>
-<footer>DonasiSTMR — Versi Demo</footer>
+<footer>
+© 2026 ALFANSTORE.id<br>
+Top Up Game • Dark Gaming Store
+</footer>
 
 <script>
-const $ = id => document.getElementById(id);
+const products = {
+  "Mobile Legends": [
+    ["5 Diamonds",1500],
+    ["12 Diamonds",3500],
+    ["28 Diamonds",8000],
+    ["86 Diamonds",22000],
+    ["172 Diamonds",43000],
+    ["257 Diamonds",64000]
+  ],
 
-function read(key, fallback) {
-  try {
-    return JSON.parse(localStorage.getItem(key)) ?? fallback;
-  } catch {
-    return fallback;
-  }
+  "Free Fire": [
+    ["5 Diamonds",1000],
+    ["12 Diamonds",2000],
+    ["50 Diamonds",7000],
+    ["70 Diamonds",10000],
+    ["140 Diamonds",19000],
+    ["355 Diamonds",47000]
+  ],
+
+  "PUBG Mobile": [
+    ["60 UC",15000],
+    ["120 UC",29000],
+    ["325 UC",75000],
+    ["660 UC",145000],
+    ["1800 UC",370000]
+  ]
+};
+
+let currentGame = "Mobile Legends";
+let selected = null;
+
+function rupiah(number) {
+  return "Rp " + number.toLocaleString("id-ID");
 }
 
-function users() {
-  return read("dstmr_users", {});
-}
+function renderProducts() {
+  const area = document.getElementById("nominals");
+  area.innerHTML = "";
+  selected = null;
 
-function donations() {
-  return read("dstmr_donations", {});
-}
+  document.getElementById("price").textContent =
+    "Pilih nominal dahulu";
 
-let current = localStorage.getItem("dstmr_current") || "";
-let selected = 5000;
-let creator = "";
+  document.getElementById("checkout").disabled = true;
 
-function message(id, text) {
-  $(id).textContent = text;
-  $(id).style.display = "block";
-}
+  products[currentGame].forEach(product => {
+    const button = document.createElement("button");
+    button.className = "nominal";
 
-function go(id) {
-  document.querySelectorAll("main > section").forEach(section => {
-    section.classList.add("hidden");
+    button.innerHTML =
+      `<strong>${product[0]}</strong>
+       <small>${rupiah(product[1])}</small>`;
+
+    button.onclick = () => {
+      document.querySelectorAll(".nominal")
+        .forEach(item => item.classList.remove("active"));
+
+      button.classList.add("active");
+
+      selected = product;
+
+      document.getElementById("price").textContent =
+        rupiah(product[1]);
+
+      document.getElementById("checkout").disabled = false;
+      document.getElementById("result").style.display = "none";
+    };
+
+    area.appendChild(button);
   });
-
-  $(id).classList.remove("hidden");
-
-  if (id === "dashboard") loadDashboard();
 }
 
-function register(e) {
-  e.preventDefault();
+document.querySelectorAll(".game").forEach(button => {
+  button.onclick = () => {
+    document.querySelectorAll(".game")
+      .forEach(item => item.classList.remove("active"));
 
-  const data = users();
-  const username = $("regUser").value.trim().toLowerCase();
+    button.classList.add("active");
+    currentGame = button.dataset.game;
 
-  if (data[username]) {
-    message("registerMsg", "Nama pengguna sudah digunakan.");
-    return;
-  }
-
-  data[username] = {
-    name: $("regName").value.trim(),
-    password: $("regPass").value,
-    youtube: $("regYoutube").value.trim()
+    renderProducts();
   };
-
-  localStorage.setItem("dstmr_users", JSON.stringify(data));
-  current = username;
-  localStorage.setItem("dstmr_current", current);
-
-  $("registerForm").reset();
-  go("dashboard");
-}
-
-function login(e) {
-  e.preventDefault();
-
-  const username = $("loginUser").value.trim().toLowerCase();
-  const password = $("loginPass").value;
-  const user = users()[username];
-
-  if (!user || user.password !== password) {
-    message("loginMsg", "Nama pengguna atau kata sandi salah.");
-    return;
-  }
-
-  current = username;
-  localStorage.setItem("dstmr_current", current);
-  $("loginForm").reset();
-  go("dashboard");
-}
-
-function loadDashboard() {
-  const user = users()[current];
-
-  if (!user) {
-    $("welcome").textContent = "Silakan masuk atau daftar terlebih dahulu.";
-    $("editName").value = "";
-    $("editYoutube").value = "";
-    $("profileLink").value = "";
-    $("total").textContent = "Total dukungan: Rp0";
-    $("history").textContent = "Masuk untuk melihat riwayat.";
-    return;
-  }
-
-  $("welcome").textContent = "Selamat datang, " + user.name;
-  $("editName").value = user.name;
-  $("editYoutube").value = user.youtube || "";
-  $("profileLink").value =
-    location.href.split("#")[0] + "#creator=" + encodeURIComponent(current);
-
-  renderHistory();
-}
-
-function saveProfile() {
-  const data = users();
-
-  if (!data[current]) {
-    message("dashMsg", "Silakan masuk terlebih dahulu.");
-    return;
-  }
-
-  data[current].name = $("editName").value.trim() || current;
-  data[current].youtube = $("editYoutube").value.trim();
-
-  localStorage.setItem("dstmr_users", JSON.stringify(data));
-  loadDashboard();
-  message("dashMsg", "Profil berhasil disimpan.");
-}
-
-function copyLink() {
-  const link = $("profileLink").value;
-
-  if (!link) return message("dashMsg", "Masuk terlebih dahulu.");
-
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(link)
-      .then(() => message("dashMsg", "Link berhasil disalin."))
-      .catch(() => message("dashMsg", "Silakan salin link dari kolom."));
-  } else {
-    message("dashMsg", "Silakan salin link dari kolom.");
-  }
-}
-
-function logout() {
-  current = "";
-  localStorage.removeItem("dstmr_current");
-  go("home");
-}
-
-function renderHistory() {
-  const list = donations()[current] || [];
-  const total = list.reduce((sum, item) => sum + item.amount, 0);
-
-  $("total").textContent =
-    "Total dukungan demo: Rp" + total.toLocaleString("id-ID");
-
-  $("history").innerHTML = "";
-
-  if (!list.length) {
-    $("history").textContent = "Belum ada donasi.";
-    return;
-  }
-
-  [...list].reverse().forEach(item => {
-    const div = document.createElement("div");
-    div.className = "history";
-
-    const name = document.createElement("strong");
-    name.textContent = item.name;
-
-    const amount = document.createElement("p");
-    amount.textContent = "Rp" + item.amount.toLocaleString("id-ID");
-
-    const note = document.createElement("p");
-    note.textContent = item.message || "Tanpa pesan";
-
-    const date = document.createElement("small");
-    date.textContent = item.date;
-
-    div.append(name, amount, note, date);
-    $("history").appendChild(div);
-  });
-}
-
-function youtubeId(url) {
-  try {
-    const u = new URL(url);
-
-    if (u.hostname.includes("youtu.be"))
-      return u.pathname.slice(1).split("/")[0];
-
-    if (u.hostname.includes("youtube.com")) {
-      if (u.pathname === "/watch") return u.searchParams.get("v") || "";
-
-      const parts = u.pathname.split("/");
-      if (["embed", "shorts"].includes(parts[1])) return parts[2] || "";
-    }
-  } catch {}
-
-  return "";
-}
-
-function openCreator(username) {
-  const user = users()[username];
-
-  if (!user) {
-    go("home");
-    return;
-  }
-
-  creator = username;
-  $("creatorName").textContent = "Dukung " + user.name;
-
-  const id = youtubeId(user.youtube || "");
-
-  $("videoBox").innerHTML = id
-    ? '<iframe src="https://www.youtube-nocookie.com/embed/' +
-      encodeURIComponent(id) +
-      '" allowfullscreen title="Video kreator"></iframe>'
-    : "";
-
-  $("noVideo").style.display = id ? "none" : "block";
-  $("donorName").value = "";
-  $("donorMessage").value = "";
-  $("customAmount").value = "";
-  $("donateMsg").style.display = "none";
-
-  selected = 5000;
-
-  document.querySelectorAll(".amount").forEach(button => {
-    button.classList.toggle(Number(button.dataset.value) === selected);
-  });
-
-  go("creator");
-}
-
-document.querySelectorAll(".amount").forEach(button => {
-  button.addEventListener("click", () => {
-    selected = Number(button.dataset.value);
-    $("customAmount").value = "";
-
-    document.querySelectorAll(".amount").forEach(b => {
-      b.classList.toggle("active", b === button);
-    });
-  });
 });
 
-$("customAmount").addEventListener("input", () => {
-  document.querySelectorAll(".amount").forEach(b => b.classList.remove("active"));
-});
+document.getElementById("checkout").onclick = () => {
+  const player = document.getElementById("player").value.trim();
+  const server = document.getElementById("server").value.trim();
 
-function donate() {
-  if (!creator || !users()[creator]) {
-    message("donateMsg", "Kreator tidak ditemukan.");
+  if (!player || !selected) {
+    alert("Masukkan User ID dan pilih nominal.");
     return;
   }
 
-  const amount = $("customAmount").value
-    ? Number($("customAmount").value)
-    : selected;
+  const orderId = "AFS-" + Date.now().toString().slice(-8);
 
-  if (!Number.isInteger(amount) || amount < 1000 || amount > 1000000) {
-    message("donateMsg", "Nominal minimal Rp1.000 dan maksimal Rp1.000.000.");
-    return;
-  }
+  const result = document.getElementById("result");
 
-  const all = donations();
+  result.style.display = "block";
 
-  if (!all[creator]) all[creator] = [];
+  result.innerHTML = `
+    <strong>Pesanan Demo Berhasil Dibuat!</strong><br><br>
+    Nomor: ${orderId}<br>
+    Game: ${currentGame}<br>
+    Produk: ${selected[0]}<br>
+    User ID: ${player}<br>
+    Server: ${server || "-"}<br>
+    Total: ${rupiah(selected[1])}<br><br>
+    <small>Ini hanya simulasi, bukan transaksi sungguhan.</small>
+  `;
+};
 
-  all[creator].push({
-    name: $("donorName").value.trim() || "Anonim",
-    message: $("donorMessage").value.trim(),
-    amount: amount,
-    date: new Date().toLocaleString("id-ID")
-  });
-
-  localStorage.setItem("dstmr_donations", JSON.stringify(all));
-
-  message(
-    "donateMsg",
-    "Donasi demo Rp" + amount.toLocaleString("id-ID") +
-    " berhasil dicatat. Tidak ada uang yang dibayarkan."
-  );
-}
-
-$("registerForm").addEventListener("submit", register);
-$("loginForm").addEventListener("submit", login);
-
-function checkLink() {
-  const match = location.hash.match(/^#creator=(.+)$/);
-
-  if (match) {
-    try {
-      openCreator(decodeURIComponent(match[1]));
-    } catch {
-      go("home");
-    }
-  } else {
-    go("home");
-  }
-}
-
-window.addEventListener("hashchange", checkLink);
-checkLink();
+renderProducts();
 </script>
 
 </body>
