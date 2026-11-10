@@ -1,371 +1,160 @@
 
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ALFANSTORE.id - Top Up Game</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ALFANSTORE.id - Digital Store</title>
 <style>
-* {
-  box-sizing: border-box;
+*{box-sizing:border-box}
+body{
+ margin:0;background:#0b1020;color:#fff;
+ font-family:Arial,sans-serif;
 }
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #080d19;
-  color: white;
+header{
+ padding:20px;background:#111a30;
+ display:flex;justify-content:space-between;
+ align-items:center;border-bottom:1px solid #263653;
 }
-
-header {
-  padding: 20px;
-  background: #111a2e;
-  border-bottom: 1px solid #263653;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.logo{font-size:22px;font-weight:bold;color:#65b7ff}
+nav{padding:12px;display:flex;gap:8px;overflow:auto}
+nav button,.item button{
+ border:0;border-radius:9px;padding:11px;
+ background:#1c2b48;color:white;cursor:pointer;
 }
-
-.logo {
-  font-size: 23px;
-  font-weight: bold;
+.hero{padding:25px 18px}
+.hero h1{font-size:29px;margin-bottom:8px}
+.hero p{color:#aab8d0}
+.container{padding:15px}
+.grid{
+ display:grid;grid-template-columns:repeat(2,1fr);
+ gap:12px;
 }
-
-.logo span {
-  color: #22d3ee;
+.item{
+ background:#151f35;border:1px solid #293b5b;
+ border-radius:14px;padding:16px;
 }
-
-.badge {
-  color: #22d3ee;
-  font-size: 12px;
+.item .emoji{font-size:30px}
+.item h3{margin:10px 0 5px}
+.item p{color:#aab8d0;font-size:13px}
+.item button{width:100%;background:#147de0}
+.panel{
+ background:#151f35;border-radius:14px;
+ padding:17px;margin-top:20px;
 }
-
-.hero {
-  margin: 20px;
-  padding: 30px 20px;
-  border-radius: 18px;
-  background: linear-gradient(120deg,#24134d,#123b58);
+input,select{
+ width:100%;padding:13px;margin:8px 0;
+ background:#0c1528;color:white;
+ border:1px solid #344664;border-radius:8px;
 }
-
-.hero h1 {
-  font-size: 30px;
+.primary{
+ width:100%;padding:14px;border:0;
+ background:#1687ed;color:white;
+ border-radius:9px;font-weight:bold;
 }
-
-.hero p {
-  color: #c5d1e5;
-}
-
-.container {
-  padding: 20px;
-  max-width: 800px;
-  margin: auto;
-}
-
-h2 {
-  font-size: 20px;
-}
-
-.games {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 10px;
-}
-
-.game {
-  background: #15213a;
-  border: 1px solid #344563;
-  border-radius: 12px;
-  padding: 15px 5px;
-  color: white;
-  cursor: pointer;
-}
-
-.game.active {
-  border: 2px solid #22d3ee;
-  background: #103047;
-}
-
-.game span {
-  display: block;
-  font-size: 27px;
-  margin-bottom: 7px;
-}
-
-.panel {
-  margin-top: 20px;
-  padding: 20px;
-  background: #111a2e;
-  border: 1px solid #263653;
-  border-radius: 15px;
-}
-
-label {
-  display: block;
-  margin: 15px 0 7px;
-  color: #c5d1e5;
-}
-
-input {
-  width: 100%;
-  padding: 13px;
-  background: #080d19;
-  border: 1px solid #344563;
-  border-radius: 9px;
-  color: white;
-  font-size: 15px;
-}
-
-.nominals {
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
-  gap: 10px;
-}
-
-.nominal {
-  background: #0b1425;
-  border: 1px solid #344563;
-  color: white;
-  padding: 13px;
-  border-radius: 10px;
-  cursor: pointer;
-  text-align: left;
-}
-
-.nominal.active {
-  border: 2px solid #22d3ee;
-  background: #103047;
-}
-
-.nominal small {
-  display: block;
-  color: #9aa9c2;
-  margin-top: 5px;
-}
-
-.price {
-  color: #22d3ee;
-  font-size: 22px;
-  font-weight: bold;
-  margin-top: 15px;
-}
-
-.checkout {
-  width: 100%;
-  margin-top: 20px;
-  padding: 15px;
-  border: 0;
-  border-radius: 10px;
-  background: linear-gradient(90deg,#7c3aed,#2563eb);
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.checkout:disabled {
-  opacity: .45;
-  cursor: not-allowed;
-}
-
-.result {
-  display: none;
-  margin-top: 15px;
-  padding: 15px;
-  background: #10352d;
-  border: 1px solid #16805d;
-  border-radius: 10px;
-  color: #a7f3d0;
-}
-
-footer {
-  text-align: center;
-  padding: 25px;
-  color: #9aa9c2;
-  font-size: 12px;
-}
+footer{text-align:center;padding:25px;color:#8291aa}
 </style>
 </head>
-
 <body>
 
 <header>
-  <div class="logo">ALFANSTORE<span>.id</span></div>
-  <div class="badge">⚡ TOP UP GAME</div>
+ <div class="logo">⚡ ALFANSTORE.id</div>
+ <div>Digital Store</div>
 </header>
 
+<nav>
+ <button onclick="show('game')">Top Up Game</button>
+ <button onclick="show('pulsa')">Pulsa</button>
+ <button onclick="show('data')">Paket Data</button>
+ <button onclick="show('pln')">Token PLN</button>
+</nav>
+
 <section class="hero">
-  <h1>TOP UP GAME FAVORITMU</h1>
-  <p>Cepat, mudah, dan praktis bersama ALFANSTORE.id</p>
+ <h1>Top Up & Produk Digital</h1>
+ <p>Semua kebutuhan digital dalam satu tempat.</p>
 </section>
 
-<div class="container">
+<main class="container">
+ <h2 id="heading">Pilih Produk</h2>
+ <div class="grid" id="products"></div>
 
-<h2>1. Pilih Game</h2>
-
-<div class="games">
-  <button class="game active" data-game="Mobile Legends">
-    <span>⚔️</span>Mobile Legends
-  </button>
-
-  <button class="game" data-game="Free Fire">
-    <span>🔥</span>Free Fire
-  </button>
-
-  <button class="game" data-game="PUBG Mobile">
-    <span>🎯</span>PUBG Mobile
-  </button>
-</div>
-
-<div class="panel">
-
-<h2>2. Data Akun</h2>
-
-<label>User ID</label>
-<input id="player" placeholder="Masukkan User ID">
-
-<label>Server / Zone ID</label>
-<input id="server" placeholder="Masukkan Server ID jika diperlukan">
-
-<h2>3. Pilih Nominal</h2>
-
-<div class="nominals" id="nominals"></div>
-
-<div class="price" id="price">Pilih nominal dahulu</div>
-
-<button class="checkout" id="checkout" disabled>
-  BUAT PESANAN DEMO
-</button>
-
-<div class="result" id="result"></div>
-
-<p style="color:#9aa9c2;font-size:12px">
-  Mode demo. Belum ada pembayaran atau pengiriman diamond sungguhan.
-</p>
-
-</div>
-</div>
+ <div class="panel">
+  <h3>Form Pemesanan</h3>
+  <form id="order">
+   <input id="product" placeholder="Produk pilihan" readonly required>
+   <input id="target" placeholder="ID Game / Nomor HP / ID Pelanggan" required>
+   <input id="buyer" type="text" placeholder="Nama pembeli" required>
+   <input id="price" type="text" placeholder="Harga" readonly>
+   <button class="primary" type="submit">
+    Lanjutkan Pesanan
+   </button>
+  </form>
+  <p id="message" style="color:#9eb6d8"></p>
+ </div>
+</main>
 
 <footer>
-© 2026 ALFANSTORE.id<br>
-Top Up Game • Dark Gaming Store
+ © 2026 ALFANSTORE.id
+<br>Digital Store
 </footer>
 
 <script>
-const products = {
-  "Mobile Legends": [
-    ["5 Diamonds",1500],
-    ["12 Diamonds",3500],
-    ["28 Diamonds",8000],
-    ["86 Diamonds",22000],
-    ["172 Diamonds",43000],
-    ["257 Diamonds",64000]
-  ],
-
-  "Free Fire": [
-    ["5 Diamonds",1000],
-    ["12 Diamonds",2000],
-    ["50 Diamonds",7000],
-    ["70 Diamonds",10000],
-    ["140 Diamonds",19000],
-    ["355 Diamonds",47000]
-  ],
-
-  "PUBG Mobile": [
-    ["60 UC",15000],
-    ["120 UC",29000],
-    ["325 UC",75000],
-    ["660 UC",145000],
-    ["1800 UC",370000]
-  ]
+const catalog={
+ game:[
+  ["🎮","Mobile Legends","Top Up Diamond",20000],
+  ["🔥","Free Fire","Top Up Diamond",15000],
+  ["🔫","PUBG Mobile","Top Up UC",25000]
+ ],
+ pulsa:[
+  ["📱","Pulsa 10.000","Pulsa HP",11000],
+  ["📱","Pulsa 20.000","Pulsa HP",21000],
+  ["📱","Pulsa 50.000","Pulsa HP",51000]
+ ],
+ data:[
+  ["🌐","Paket Data 5GB","Paket internet",18000],
+  ["🌐","Paket Data 10GB","Paket internet",30000],
+  ["🌐","Paket Data 20GB","Paket internet",50000]
+ ],
+ pln:[
+  ["⚡","Token PLN 20.000","Listrik prabayar",22000],
+  ["⚡","Token PLN 50.000","Listrik prabayar",52000],
+  ["⚡","Token PLN 100.000","Listrik prabayar",102000]
+ ]
 };
 
-let currentGame = "Mobile Legends";
-let selected = null;
-
-function rupiah(number) {
-  return "Rp " + number.toLocaleString("id-ID");
+function show(type){
+ const names={
+  game:"Top Up Game",
+  pulsa:"Pulsa HP",
+  data:"Paket Data",
+  pln:"Token PLN"
+ };
+ document.getElementById("heading").textContent=names[type];
+ document.getElementById("products").innerHTML=
+ catalog[type].map(x=>`
+ <div class="item">
+  <div class="emoji">${x[0]}</div>
+  <h3>${x[1]}</h3>
+  <p>${x[2]}</p>
+  <button onclick="choose('${x[1]}',${x[3]})">
+   Pilih Produk
+  </button>
+ </div>`).join("");
 }
 
-function renderProducts() {
-  const area = document.getElementById("nominals");
-  area.innerHTML = "";
-  selected = null;
-
-  document.getElementById("price").textContent =
-    "Pilih nominal dahulu";
-
-  document.getElementById("checkout").disabled = true;
-
-  products[currentGame].forEach(product => {
-    const button = document.createElement("button");
-    button.className = "nominal";
-
-    button.innerHTML =
-      `<strong>${product[0]}</strong>
-       <small>${rupiah(product[1])}</small>`;
-
-    button.onclick = () => {
-      document.querySelectorAll(".nominal")
-        .forEach(item => item.classList.remove("active"));
-
-      button.classList.add("active");
-
-      selected = product;
-
-      document.getElementById("price").textContent =
-        rupiah(product[1]);
-
-      document.getElementById("checkout").disabled = false;
-      document.getElementById("result").style.display = "none";
-    };
-
-    area.appendChild(button);
-  });
+function choose(name,price){
+ document.getElementById("product").value=name;
+ document.getElementById("price").value=
+ "Rp "+price.toLocaleString("id-ID");
 }
 
-document.querySelectorAll(".game").forEach(button => {
-  button.onclick = () => {
-    document.querySelectorAll(".game")
-      .forEach(item => item.classList.remove("active"));
-
-    button.classList.add("active");
-    currentGame = button.dataset.game;
-
-    renderProducts();
-  };
+document.getElementById("order").addEventListener("submit",e=>{
+ e.preventDefault();
+ document.getElementById("message").textContent=
+ "Form berhasil diisi. Sistem pembayaran produksi belum diaktifkan.";
 });
 
-document.getElementById("checkout").onclick = () => {
-  const player = document.getElementById("player").value.trim();
-  const server = document.getElementById("server").value.trim();
-
-  if (!player || !selected) {
-    alert("Masukkan User ID dan pilih nominal.");
-    return;
-  }
-
-  const orderId = "AFS-" + Date.now().toString().slice(-8);
-
-  const result = document.getElementById("result");
-
-  result.style.display = "block";
-
-  result.innerHTML = `
-    <strong>Pesanan Demo Berhasil Dibuat!</strong><br><br>
-    Nomor: ${orderId}<br>
-    Game: ${currentGame}<br>
-    Produk: ${selected[0]}<br>
-    User ID: ${player}<br>
-    Server: ${server || "-"}<br>
-    Total: ${rupiah(selected[1])}<br><br>
-    <small>Ini hanya simulasi, bukan transaksi sungguhan.</small>
-  `;
-};
-
-renderProducts();
+show("game");
 </script>
-
 </body>
 </html>
